@@ -47,7 +47,9 @@ body.home{margin:0;background-color:transparent;--bowie-hero-pan:0px;}
 .bowie-mobile-drawer-extras,
 .bowie-mobile-drawer-shade,
 .bowie-mobile-hero-stage,
-.bowie-mobile-hero-shell{display:none;}
+.bowie-mobile-hero-shell,
+.bowie-mobile-header-actions,
+.bowie-mobile-topbar{display:none;}
 body.home #masthead{position:fixed;top:0;left:0;right:0;z-index:4000;padding:0 20px;pointer-events:none;}
 body.home #masthead .elementor-32{max-width:1680px;margin:0 auto;pointer-events:auto;}
 body.home #masthead .elementor-element.elementor-element-50931d6,
@@ -121,23 +123,34 @@ body.home #masthead .bowie-roadster-link{width:148px;min-width:148px;min-height:
 body.home{overflow-x:hidden;}
 body.home.bowie-mobile-menu-open{overflow:hidden;}
 body.home .page-header{display:none;}
-body.home #masthead{padding:0 10px;}
-body.home .bowie-mobile-hero-shell{display:block;position:relative;overflow:hidden;padding:150px 16px 42px;background:radial-gradient(circle at 82% 6%,rgba(255,224,116,.18) 0%,rgba(255,224,116,0) 24%),linear-gradient(180deg,#06030f 0%,#07101f 58%,#081026 100%);}
+body.home #masthead{padding:8px 10px 0;}
+body.home #masthead .elementor-32{width:100%;max-width:none;}
+body.home .bowie-mobile-hero-shell{display:block;position:relative;overflow:hidden;padding:108px 16px 42px;background:radial-gradient(circle at 82% 6%,rgba(255,224,116,.18) 0%,rgba(255,224,116,0) 24%),linear-gradient(180deg,#06030f 0%,#07101f 58%,#081026 100%);}
+body.home .bowie-mobile-topbar{position:fixed;top:8px;left:10px;right:10px;display:flex;align-items:flex-start;justify-content:space-between;min-height:66px;z-index:4003;}
+body.home .bowie-mobile-topbar-logo{position:absolute;top:4px;left:50%;transform:translateX(-50%);pointer-events:none;}
+body.home .bowie-mobile-topbar-logo img{display:block;width:72px;}
+body.home .bowie-mobile-topbar-toggle{position:absolute;top:8px;left:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:44px;height:44px;padding:0;border:0;border-radius:14px;background:rgba(8,4,18,.88);box-shadow:0 18px 34px rgba(0,0,0,.28);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+body.home .bowie-mobile-topbar-toggle span{display:block;width:18px;height:2px;border-radius:999px;background:#fff;}
+body.home .bowie-mobile-topbar-actions{position:absolute;top:12px;left:calc(50% + 18px);display:flex;align-items:center;gap:4px;}
+body.home .bowie-mobile-topbar-social{display:flex;align-items:center;justify-content:center;width:24px;height:24px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.28));}
+body.home .bowie-mobile-topbar-social img{display:block;width:100%;height:100%;}
+body.home .bowie-mobile-topbar-buy{display:inline-flex;align-items:center;justify-content:center;width:68px;min-width:68px;min-height:28px;padding:4px 5px;border:none;border-radius:0;clip-path:polygon(10% 0,100% 0,90% 100%,0 100%);background:linear-gradient(90deg,#ff192b 0%,#8f48b4 42%,#2b80ff 100%);color:#fff;text-decoration:none;text-transform:uppercase;font-family:"Bayon",Sans-serif;font-size:8px;font-style:italic;letter-spacing:.03em;line-height:.92;box-shadow:0 14px 26px rgba(0,0,0,.26);}
+body.home .bowie-mobile-topbar-buy span{display:block;}
 body.home .bowie-mobile-top-anchor{position:absolute;top:0;left:0;}
-body.home .bowie-mobile-hero-copy{position:relative;z-index:1;padding-top:24px;}
+body.home .bowie-mobile-hero-copy{position:relative;z-index:1;padding-top:0;}
 body.home .bowie-mobile-hero-title{margin:0;max-width:8.2ch;font-family:"Bayon",sans-serif;font-size:clamp(42px,12.6vw,60px);font-style:italic;line-height:.88;text-transform:uppercase;color:#fff;text-shadow:0 18px 36px rgba(0,0,0,.22);}
-body.home .bowie-mobile-hero-text{margin-top:16px;max-width:100%;white-space:normal;color:rgba(255,255,255,.92);font-family:"Bayon",sans-serif;font-size:19px;font-style:italic;line-height:1.62;text-shadow:0 12px 28px rgba(0,0,0,.18);}
-body.home .bowie-mobile-hero-text p{margin:0 0 14px;}
+body.home .bowie-mobile-hero-text{margin-top:16px;max-width:100%;width:100%;white-space:normal;color:rgba(255,255,255,.92);font-family:"Bayon",sans-serif;font-size:17px;font-style:italic;line-height:1.58;text-shadow:0 12px 28px rgba(0,0,0,.18);}
+body.home .bowie-mobile-hero-text p{margin:0 0 14px;white-space:normal;overflow-wrap:anywhere;}
 body.home .bowie-mobile-hero-buy{margin-top:22px;}
 body.home .bowie-mobile-hero-buy img{display:block;width:min(84vw,320px);}
-body.home #masthead .elementor-element.elementor-element-41eda6e{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;padding:10px 6px 0 !important;gap:0;}
-body.home #masthead .elementor-element.elementor-element-41eda6e::after{content:"";width:52px;height:52px;display:block;}
-body.home #masthead .elementor-element.elementor-element-31db8af{grid-column:2;justify-self:center;min-width:0;}
-body.home #masthead .elementor-element.elementor-element-4a6c8e5{grid-column:1;justify-self:start;min-width:0;}
-body.home #masthead .elementor-element.elementor-element-56fd8a4 img{width:82px;}
+body.home #masthead .elementor-element.elementor-element-41eda6e{position:static;width:0 !important;min-height:0;padding:0 !important;overflow:visible;}
+body.home #masthead .elementor-element.elementor-element-31db8af,
+body.home #masthead .bowie-mobile-header-actions{display:none !important;}
+body.home #masthead .elementor-element.elementor-element-4a6c8e5{position:fixed;top:-9999px;left:-9999px;min-width:0;z-index:2;padding-top:0;}
+body.home #masthead .elementor-element.elementor-element-56fd8a4 img{width:72px;}
 body.home #masthead .elementor-element.elementor-element-ab9ce3c{width:auto;}
-body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__toggle{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:16px;background:rgba(8,4,18,.88);box-shadow:0 18px 34px rgba(0,0,0,.28);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
-body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu-icon svg{width:22px;height:22px;fill:#fff;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__toggle{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:14px;background:rgba(8,4,18,.88);box-shadow:0 18px 34px rgba(0,0,0,.28);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu-icon svg{width:18px;height:18px;fill:#fff;}
 body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal{position:fixed;top:0;left:0;width:min(86vw,340px);height:100dvh !important;padding:84px 18px 28px;background:linear-gradient(180deg,rgba(8,4,18,.97) 0%,rgba(13,10,32,.97) 100%);box-shadow:28px 0 60px rgba(0,0,0,.42);visibility:visible !important;opacity:1 !important;transform:translateX(-108%);transition:transform .3s ease;z-index:3999;overflow-y:auto;}
 body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-active-menu + .hfe-nav-menu__layout-horizontal{transform:translateX(0);}
 body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal .hfe-nav-menu{visibility:visible !important;opacity:1 !important;display:flex;flex-direction:column;align-items:stretch;gap:10px;}
@@ -183,13 +196,13 @@ body.home #masthead .elementor-element.elementor-element-0b14c8c{display:none;}
 #about,
 #bowienomics{display:flex;flex-direction:column;gap:28px;padding-left:18px;padding-right:18px;}
 #about{padding-top:24px;}
-#about .elementor-element.elementor-element-bf6f329{order:1;}
-#about .elementor-element.elementor-element-0d6aecd{order:2;}
+#about .elementor-element.elementor-element-0d6aecd{order:1;}
+#about .elementor-element.elementor-element-bf6f329{order:2;}
 #nfts > .e-con-inner{display:flex;flex-direction:column;gap:28px;padding-left:18px;padding-right:18px;}
-#nfts .elementor-element.elementor-element-185a1adc{order:1;}
-#nfts .elementor-element.elementor-element-a4cbfca{order:2;}
-#bowienomics .elementor-element.elementor-element-7b47e07{order:1;}
-#bowienomics .elementor-element.elementor-element-006b789{order:2;}
+#nfts .elementor-element.elementor-element-a4cbfca{order:1;}
+#nfts .elementor-element.elementor-element-185a1adc{order:2;}
+#bowienomics .elementor-element.elementor-element-006b789{order:1;}
+#bowienomics .elementor-element.elementor-element-7b47e07{order:2;}
 #about .elementor-element.elementor-element-bf6f329,
 #about .elementor-element.elementor-element-0d6aecd,
 #nfts .elementor-element.elementor-element-185a1adc,
@@ -419,6 +432,15 @@ body.home #masthead .elementor-element.elementor-element-0b14c8c{display:none;}
 				<div class="bowie-mobile-drawer-shade" aria-hidden="true"></div>
 			</div>
 					</div>
+		<div class="bowie-mobile-header-actions">
+			<a class="bowie-mobile-header-social" href="https://t.me/BowieSpaceDog" aria-label="Telegram">
+				<img src="/wp-content/uploads/2024/10/1-1-1024x1024.png" alt="Telegram">
+			</a>
+			<a class="bowie-mobile-header-social" href="https://x.com/SpaceDogBowie" aria-label="X">
+				<img src="/wp-content/uploads/2024/10/2-1-1024x1024.png" alt="X">
+			</a>
+			<a class="bowie-buy-link bowie-mobile-header-buy" href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204" target="_blank" rel="noopener noreferrer"><span>Buy $Bowie</span></a>
+		</div>
 				</div>
 				</div>
 				</div>
@@ -434,7 +456,36 @@ body.home #masthead .elementor-element.elementor-element-0b14c8c{display:none;}
 	<div class="page-content">
 				<div data-elementor-type="wp-page" data-elementor-id="57" class="elementor elementor-57" data-elementor-post-type="page">
 				<div class="bowie-mobile-hero-shell">
+					<div class="bowie-mobile-topbar">
+						<button type="button" class="bowie-mobile-topbar-toggle" aria-label="Open menu">
+							<span></span>
+							<span></span>
+							<span></span>
+						</button>
+						<div class="bowie-mobile-topbar-logo" aria-hidden="true">
+							<img src="/wp-content/uploads/2024/10/Untitled-design-1024x1024.png" alt="">
+						</div>
+						<div class="bowie-mobile-topbar-actions">
+							<a class="bowie-mobile-topbar-social" href="https://t.me/BowieSpaceDog" aria-label="Telegram">
+								<img src="/wp-content/uploads/2024/10/1-1-1024x1024.png" alt="Telegram">
+							</a>
+							<a class="bowie-mobile-topbar-social" href="https://x.com/SpaceDogBowie" aria-label="X">
+								<img src="/wp-content/uploads/2024/10/2-1-1024x1024.png" alt="X">
+							</a>
+							<a class="bowie-buy-link bowie-mobile-topbar-buy" href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204" target="_blank" rel="noopener noreferrer"><span>Buy $Bowie</span></a>
+						</div>
+					</div>
 					<div id="top" class="bowie-mobile-top-anchor" aria-hidden="true"></div>
+					<div class="bowie-mobile-hero-stage">
+						<div class="bowie-mobile-hero-track" tabindex="0" aria-label="Swipe left or right to explore the full Bowie hero scene">
+							<div class="bowie-mobile-hero-scene" aria-hidden="true"></div>
+						</div>
+					</div>
+					<div class="bowie-mobile-hero-buy bowie-mobile-hero-buy-primary">
+						<a href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204">
+							<img loading="eager" decoding="async" width="800" height="450" src="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png" class="elementor-animation-grow attachment-large size-large wp-image-487" alt="" srcset="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png 1024w, /wp-content/uploads/2024/10/Add-a-heading-7-300x169.png 300w, /wp-content/uploads/2024/10/Add-a-heading-7-768x432.png 768w, /wp-content/uploads/2024/10/Add-a-heading-7-1536x864.png 1536w, /wp-content/uploads/2024/10/Add-a-heading-7.png 1920w" sizes="(max-width: 800px) 100vw, 800px">
+						</a>
+					</div>
 					<div class="bowie-mobile-hero-copy">
 						<h2 class="bowie-mobile-hero-title">BOWIE the First Elon Dog<br>sent to space</h2>
 						<div class="bowie-hero-kicker">Before <span class="bowie-hero-highlight">ASTEROID SHIBA</span></div>
@@ -442,16 +493,11 @@ body.home #masthead .elementor-element.elementor-element-0b14c8c{display:none;}
 							<p>While all those memecoins dream of hitting the moon, let&#8217;s be real: Bowie rocketed off in a Tesla Roadster and has been cruising through space since 2018, like he owns the galaxy!</p>
 							<p>Thanks to Elon, now that’s what we call a rock ‘n’ roll journey!</p>
 						</div>
-						<div class="bowie-mobile-hero-buy">
-							<a href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204">
-								<img loading="eager" decoding="async" width="800" height="450" src="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png" class="elementor-animation-grow attachment-large size-large wp-image-487" alt="" srcset="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png 1024w, /wp-content/uploads/2024/10/Add-a-heading-7-300x169.png 300w, /wp-content/uploads/2024/10/Add-a-heading-7-768x432.png 768w, /wp-content/uploads/2024/10/Add-a-heading-7-1536x864.png 1536w, /wp-content/uploads/2024/10/Add-a-heading-7.png 1920w" sizes="(max-width: 800px) 100vw, 800px">
-							</a>
-						</div>
 					</div>
-					<div class="bowie-mobile-hero-stage">
-						<div class="bowie-mobile-hero-track" tabindex="0" aria-label="Swipe left or right to explore the full Bowie hero scene">
-							<div class="bowie-mobile-hero-scene" aria-hidden="true"></div>
-						</div>
+					<div class="bowie-mobile-hero-buy bowie-mobile-hero-buy-secondary">
+						<a href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204">
+							<img loading="eager" decoding="async" width="800" height="450" src="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png" class="elementor-animation-grow attachment-large size-large wp-image-487" alt="" srcset="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png 1024w, /wp-content/uploads/2024/10/Add-a-heading-7-300x169.png 300w, /wp-content/uploads/2024/10/Add-a-heading-7-768x432.png 768w, /wp-content/uploads/2024/10/Add-a-heading-7-1536x864.png 1536w, /wp-content/uploads/2024/10/Add-a-heading-7.png 1920w" sizes="(max-width: 800px) 100vw, 800px">
+						</a>
 					</div>
 				</div>
 				<div id="top-hero" class="elementor-element elementor-element-94b1630 e-flex e-con-boxed e-con e-parent e-no-lazyload e-lazyloaded" data-id="94b1630" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
@@ -966,8 +1012,9 @@ wp.i18n.setLocaleData( { 'text directionltr': [ 'ltr' ] } );
 	const body = document.body;
 	const navRoot = document.querySelector('.elementor-element-ab9ce3c .hfe-nav-menu');
 	const heroTrack = document.querySelector('.bowie-mobile-hero-track');
+	const topbarToggle = document.querySelector('.bowie-mobile-topbar-toggle');
 	const toggle = navRoot ? navRoot.querySelector('.hfe-nav-menu__toggle') : null;
-	const shade = navRoot ? navRoot.querySelector('.bowie-mobile-drawer-shade') : null;
+	const shade = document.querySelector('.elementor-element-ab9ce3c .bowie-mobile-drawer-shade');
 	let heroInteracted = false;
 	const closeMenu = () => {
 		if ( toggle && toggle.classList.contains('hfe-active-menu') ) {
@@ -977,7 +1024,11 @@ wp.i18n.setLocaleData( { 'text directionltr': [ 'ltr' ] } );
 		}
 	};
 	const syncMenuState = () => {
-		body.classList.toggle('bowie-mobile-menu-open', !!toggle && mobileQuery.matches && toggle.classList.contains('hfe-active-menu'));
+		const isOpen = !!toggle && mobileQuery.matches && toggle.classList.contains('hfe-active-menu');
+		body.classList.toggle('bowie-mobile-menu-open', isOpen);
+		if ( topbarToggle ) {
+			topbarToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+		}
 	};
 	const centerHeroTrack = () => {
 		if ( !heroTrack || !mobileQuery.matches || heroInteracted ) {
@@ -989,6 +1040,12 @@ wp.i18n.setLocaleData( { 'text directionltr': [ 'ltr' ] } );
 	};
 	if ( toggle ) {
 		toggle.addEventListener('click', () => window.requestAnimationFrame(syncMenuState));
+	}
+	if ( topbarToggle && toggle ) {
+		topbarToggle.addEventListener('click', () => {
+			toggle.click();
+			window.requestAnimationFrame(syncMenuState);
+		});
 	}
 	if ( shade ) {
 		shade.addEventListener('click', closeMenu);
