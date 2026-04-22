@@ -41,9 +41,13 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 <link rel="stylesheet" id="elementor-post-57-css" href="/wp-content/uploads/elementor/css/post-57.css?ver=1729507685" media="all">
 <style id="bowie-homepage-performance-fixes">
 html{scroll-behavior:smooth;}
-body.home{margin:0;background-color:transparent;}
+body.home{margin:0;background-color:transparent;--bowie-hero-pan:0px;}
 #about,#nfts,#bowienomics,#utilities{scroll-margin-top:124px;}
 #top{scroll-margin-top:0;}
+.bowie-mobile-drawer-extras,
+.bowie-mobile-drawer-shade,
+.bowie-mobile-hero-stage,
+.bowie-mobile-hero-shell{display:none;}
 body.home #masthead{position:fixed;top:0;left:0;right:0;z-index:4000;padding:0 20px;pointer-events:none;}
 body.home #masthead .elementor-32{max-width:1680px;margin:0 auto;pointer-events:auto;}
 body.home #masthead .elementor-element.elementor-element-50931d6,
@@ -114,15 +118,121 @@ body.home #masthead .bowie-roadster-link{width:148px;min-width:148px;min-height:
 .elementor-57 .elementor-element.elementor-element-5bac2d9{--spacer-size:360px;}
 }
 @media (max-width: 767px){
-body.home #masthead .bowie-buy-link,
-body.home #masthead .bowie-roadster-link{min-width:unset;width:100%;padding:11px 16px;font-size:20px;}
-.elementor-57 .elementor-element.elementor-element-94b1630{min-height:720px;background-position:60% top !important;margin-top:-96px !important;}
-.elementor-57 .elementor-element.elementor-element-94b1630::after{background-position:60% top;}
-.elementor-57 .elementor-element.elementor-element-5bac2d9{--spacer-size:300px;}
-.elementor-57 .elementor-element.elementor-element-c68320e .elementor-heading-title{max-width:none;font-size:38px;}
-.elementor-57 .bowie-hero-kicker{font-size:28px;}
-.elementor-57 .elementor-element.elementor-element-d731fd3{font-size:15px;max-width:none;}
-.elementor-57 .elementor-element.elementor-element-effb1a5 img{width:248px;}
+body.home{overflow-x:hidden;}
+body.home.bowie-mobile-menu-open{overflow:hidden;}
+body.home .page-header{display:none;}
+body.home #masthead{padding:0 10px;}
+body.home .bowie-mobile-hero-shell{display:block;position:relative;overflow:hidden;padding:150px 16px 42px;background:radial-gradient(circle at 82% 6%,rgba(255,224,116,.18) 0%,rgba(255,224,116,0) 24%),linear-gradient(180deg,#06030f 0%,#07101f 58%,#081026 100%);}
+body.home .bowie-mobile-top-anchor{position:absolute;top:0;left:0;}
+body.home .bowie-mobile-hero-copy{position:relative;z-index:1;padding-top:24px;}
+body.home .bowie-mobile-hero-title{margin:0;max-width:8.2ch;font-family:"Bayon",sans-serif;font-size:clamp(42px,12.6vw,60px);font-style:italic;line-height:.88;text-transform:uppercase;color:#fff;text-shadow:0 18px 36px rgba(0,0,0,.22);}
+body.home .bowie-mobile-hero-text{margin-top:16px;max-width:100%;white-space:normal;color:rgba(255,255,255,.92);font-family:"Bayon",sans-serif;font-size:19px;font-style:italic;line-height:1.62;text-shadow:0 12px 28px rgba(0,0,0,.18);}
+body.home .bowie-mobile-hero-text p{margin:0 0 14px;}
+body.home .bowie-mobile-hero-buy{margin-top:22px;}
+body.home .bowie-mobile-hero-buy img{display:block;width:min(84vw,320px);}
+body.home #masthead .elementor-element.elementor-element-41eda6e{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;padding:10px 6px 0 !important;gap:0;}
+body.home #masthead .elementor-element.elementor-element-41eda6e::after{content:"";width:52px;height:52px;display:block;}
+body.home #masthead .elementor-element.elementor-element-31db8af{grid-column:2;justify-self:center;min-width:0;}
+body.home #masthead .elementor-element.elementor-element-4a6c8e5{grid-column:1;justify-self:start;min-width:0;}
+body.home #masthead .elementor-element.elementor-element-56fd8a4 img{width:82px;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c{width:auto;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__toggle{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:16px;background:rgba(8,4,18,.88);box-shadow:0 18px 34px rgba(0,0,0,.28);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu-icon svg{width:22px;height:22px;fill:#fff;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal{position:fixed;top:0;left:0;width:min(86vw,340px);height:100dvh !important;padding:84px 18px 28px;background:linear-gradient(180deg,rgba(8,4,18,.97) 0%,rgba(13,10,32,.97) 100%);box-shadow:28px 0 60px rgba(0,0,0,.42);visibility:visible !important;opacity:1 !important;transform:translateX(-108%);transition:transform .3s ease;z-index:3999;overflow-y:auto;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-active-menu + .hfe-nav-menu__layout-horizontal{transform:translateX(0);}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal .hfe-nav-menu{visibility:visible !important;opacity:1 !important;display:flex;flex-direction:column;align-items:stretch;gap:10px;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal li.menu-item{width:100%;margin:0;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal a.hfe-menu-item,
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal a.hfe-sub-menu-item{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:20px;line-height:1.05;text-transform:uppercase;text-shadow:none;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal .sub-menu{position:static;background:transparent;box-shadow:none;display:none;padding:8px 0 0 0;margin:0;visibility:visible !important;opacity:1 !important;height:auto !important;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal .menu-active > .sub-menu{display:block;}
+body.home #masthead .elementor-element.elementor-element-ab9ce3c .hfe-nav-menu__layout-horizontal .hfe-has-submenu-container{width:100%;}
+body.home #masthead .bowie-mobile-drawer-extras{display:flex;flex-direction:column;gap:16px;padding-top:18px;}
+body.home #masthead .bowie-mobile-socials{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
+body.home #masthead .bowie-mobile-socials a{display:flex;align-items:center;justify-content:center;padding:10px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);}
+body.home #masthead .bowie-mobile-socials img{width:42px;height:42px;display:block;filter:drop-shadow(0 8px 16px rgba(0,0,0,.28));}
+body.home #masthead .bowie-mobile-cta-stack{display:flex;flex-direction:column;gap:12px;}
+body.home #masthead .bowie-mobile-drawer-extras .bowie-buy-link,
+body.home #masthead .bowie-mobile-drawer-extras .bowie-roadster-link{width:100%;min-width:0;min-height:54px;font-size:19px;}
+body.home #masthead .bowie-mobile-drawer-shade{display:block;position:fixed;inset:0;background:rgba(3,2,9,.56);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:3998;}
+body.home.bowie-mobile-menu-open #masthead .bowie-mobile-drawer-shade{opacity:1;pointer-events:auto;}
+body.home #masthead .elementor-element.elementor-element-cad530f{transform:none;}
+body.home #masthead .elementor-element.elementor-element-3d48e0d,
+body.home #masthead .elementor-element.elementor-element-0b14c8c{display:none;}
+.elementor-57 .elementor-element.elementor-element-94b1630{min-height:auto;margin-top:-110px !important;padding:0 0 40px;background:radial-gradient(circle at 78% 6%,rgba(255,224,116,.18) 0%,rgba(255,224,116,0) 24%),linear-gradient(180deg,#06030f 0%,#07101f 58%,#081026 100%) !important;}
+.elementor-57 #top-hero{display:none !important;}
+.elementor-57 .elementor-element.elementor-element-94b1630 > .elementor-motion-effects-container{display:none !important;}
+.elementor-57 .elementor-element.elementor-element-94b1630:not(.elementor-motion-effects-element-type-background),
+.elementor-57 .elementor-element.elementor-element-94b1630 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background:none !important;}
+.elementor-57 .elementor-element.elementor-element-94b1630::after,
+.elementor-57 .elementor-element.elementor-element-94b1630::before{display:none;}
+.elementor-57 .elementor-element.elementor-element-94b1630 > .e-con-inner{display:flex;flex-direction:column;gap:24px;padding:124px 16px 0;}
+.elementor-57 .elementor-element.elementor-element-ff5fcaf{display:none;}
+.elementor-57 .elementor-element.elementor-element-b934bfa{align-items:flex-start;justify-content:flex-start;padding:0;gap:0;width:100%;}
+.elementor-57 .elementor-element.elementor-element-5bac2d9{display:none;}
+.elementor-57 .elementor-element.elementor-element-c68320e .elementor-heading-title{max-width:8.2ch;font-size:clamp(42px,12.6vw,60px);line-height:.88;text-shadow:0 18px 36px rgba(0,0,0,.22);}
+.elementor-57 .bowie-hero-kicker{font-size:clamp(28px,8.3vw,40px);line-height:1.04;margin-top:12px;}
+.elementor-57 .elementor-element.elementor-element-d731fd3{font-size:19px;line-height:1.62;max-width:none;color:rgba(255,255,255,.92);text-shadow:0 12px 28px rgba(0,0,0,.18);}
+.elementor-57 .elementor-element.elementor-element-effb1a5 > .elementor-widget-container{margin:22px 0 0 0;}
+.elementor-57 .elementor-element.elementor-element-effb1a5 img{width:min(84vw,320px);}
+.elementor-57 .bowie-mobile-hero-stage{display:block;position:relative;width:100%;margin-top:26px;border-radius:30px;overflow:hidden;background:linear-gradient(180deg,rgba(8,4,18,.78) 0%,rgba(12,10,30,.42) 100%);box-shadow:0 26px 52px rgba(0,0,0,.34);}
+.elementor-57 .bowie-mobile-hero-track{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x;overscroll-behavior-x:contain;}
+.elementor-57 .bowie-mobile-hero-track::-webkit-scrollbar{display:none;}
+.elementor-57 .bowie-mobile-hero-scene{position:relative;width:max(820px,210vw);height:430px;background-image:url("/wp-content/uploads/2024/10/IMG_2088.gif"),url("/wp-content/uploads/2024/10/IMG_2088-poster.jpg");background-repeat:no-repeat;background-position:center top,center top;background-size:auto 100%,auto 100%;}
+.elementor-57 .bowie-mobile-hero-scene::after{content:"Swipe left or right to see all of Bowie";position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:999px;background:rgba(8,4,18,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-family:"Titillium Web",sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.86);}
+#about,
+#bowienomics{display:flex;flex-direction:column;gap:28px;padding-left:18px;padding-right:18px;}
+#about{padding-top:24px;}
+#about .elementor-element.elementor-element-bf6f329{order:1;}
+#about .elementor-element.elementor-element-0d6aecd{order:2;}
+#nfts > .e-con-inner{display:flex;flex-direction:column;gap:28px;padding-left:18px;padding-right:18px;}
+#nfts .elementor-element.elementor-element-185a1adc{order:1;}
+#nfts .elementor-element.elementor-element-a4cbfca{order:2;}
+#bowienomics .elementor-element.elementor-element-7b47e07{order:1;}
+#bowienomics .elementor-element.elementor-element-006b789{order:2;}
+#about .elementor-element.elementor-element-bf6f329,
+#about .elementor-element.elementor-element-0d6aecd,
+#nfts .elementor-element.elementor-element-185a1adc,
+#nfts .elementor-element.elementor-element-a4cbfca,
+#bowienomics .elementor-element.elementor-element-7b47e07,
+#bowienomics .elementor-element.elementor-element-006b789{width:100%;max-width:none;}
+#bowienomics .elementor-element.elementor-element-b1fdd85{display:none;}
+#about .elementor-element.elementor-element-7daf93e,
+#nfts .elementor-element.elementor-element-7231417,
+#bowienomics .elementor-element.elementor-element-3220f6d{transform:none !important;}
+#about .elementor-element.elementor-element-7daf93e img,
+#nfts .elementor-element.elementor-element-7231417 img,
+#bowienomics .elementor-element.elementor-element-3220f6d img{width:100% !important;max-width:440px;margin:0 auto;display:block;height:auto;}
+#about .elementor-heading-title,
+#nfts .elementor-heading-title,
+#bowienomics .elementor-heading-title,
+#utilities .elementor-heading-title{font-size:clamp(36px,9vw,48px) !important;line-height:.94;}
+#about .elementor-widget-text-editor,
+#nfts .elementor-widget-text-editor,
+#bowienomics .elementor-widget-text-editor,
+#utilities .elementor-widget-text-editor{max-width:100%;white-space:normal;font-size:19px;line-height:1.72;overflow-wrap:break-word;}
+#about .elementor-widget-text-editor br,
+#nfts .elementor-widget-text-editor br,
+#bowienomics .elementor-widget-text-editor br{display:none;}
+#about .elementor-element.elementor-element-c2676d6,
+#nfts .elementor-element.elementor-element-484e676{max-width:none;}
+#utilities{padding-left:16px;padding-right:16px;}
+#utilities .elementor-element.elementor-element-4285fea{margin-bottom:8px;}
+#utilities .elementor-element.elementor-element-6f0c5b9,
+#utilities .elementor-element.elementor-element-59f4dd6,
+#utilities .elementor-element.elementor-element-a49e57a{width:100%;}
+#utilities .elementor-element.elementor-element-96054cd,
+#utilities .elementor-element.elementor-element-1164e14,
+#utilities .elementor-element.elementor-element-2bfc882,
+#utilities .elementor-element.elementor-element-d0bae63{padding:18px 16px;}
+#utilities .elementor-element.elementor-element-815c28b .elementor-heading-title,
+#utilities .elementor-element.elementor-element-157ab1e .elementor-heading-title,
+#utilities .elementor-element.elementor-element-1d0198d .elementor-heading-title,
+#utilities .elementor-element.elementor-element-502db36 .elementor-heading-title{font-size:26px !important;}
+#utilities .elementor-element.elementor-element-13d3e9e,
+#utilities .elementor-element.elementor-element-66a034c,
+#utilities .elementor-element.elementor-element-ffc7119,
+#utilities .elementor-element.elementor-element-80b9560{font-size:17px;}
 }
 </style>
 <link rel="stylesheet" id="elementor-post-32-css" href="/wp-content/uploads/elementor/css/post-32.css?ver=1729507284" media="all">
@@ -209,7 +319,7 @@ body.home #masthead .bowie-roadster-link{min-width:unset;width:100%;padding:11px
 	<li id="menu-item-398" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu"><a href="/coming-soon/" class="hfe-sub-menu-item">BOWX</a></li>
 </ul>
 </li>
-</ul> 
+</ul>
 				</nav>
 			</div>
 					</div>
@@ -292,8 +402,21 @@ body.home #masthead .bowie-roadster-link{min-width:unset;width:100%;padding:11px
 	<li id="menu-item-398" class="menu-item menu-item-type-post_type menu-item-object-page hfe-creative-menu"><a href="/coming-soon/" class="hfe-sub-menu-item">BOWX</a></li>
 </ul>
 </li>
-</ul> 
+</ul>
+<div class="bowie-mobile-drawer-extras">
+	<div class="bowie-mobile-socials">
+		<a href="https://t.me/BowieSpaceDog" aria-label="Telegram"><img src="/wp-content/uploads/2024/10/1-1-1024x1024.png" alt="Telegram"></a>
+		<a href="https://x.com/SpaceDogBowie" aria-label="X"><img src="/wp-content/uploads/2024/10/2-1-1024x1024.png" alt="X"></a>
+		<a href="https://www.instagram.com/bowiespacexdog/" aria-label="Instagram"><img src="/wp-content/uploads/2024/10/3-1-1024x1024.png" alt="Instagram"></a>
+		<a href="https://medium.com/@bowiespacedog/bowie-the-space-dog-be1c52dbc8bc" aria-label="Medium"><img src="/wp-content/uploads/2024/10/4-1024x1024.png" alt="Medium"></a>
+	</div>
+	<div class="bowie-mobile-cta-stack">
+		<a class="bowie-buy-link" href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204" target="_blank" rel="noopener noreferrer"><span>Buy $Bowie</span></a>
+		<a class="bowie-roadster-link" href="https://www.whereisroadster.com/#google_vignette" target="_blank" rel="noopener noreferrer"><span>Where is the Roadster</span></a>
+	</div>
+</div>
 				</nav>
+				<div class="bowie-mobile-drawer-shade" aria-hidden="true"></div>
 			</div>
 					</div>
 				</div>
@@ -310,7 +433,28 @@ body.home #masthead .bowie-roadster-link{min-width:unset;width:100%;padding:11px
 	
 	<div class="page-content">
 				<div data-elementor-type="wp-page" data-elementor-id="57" class="elementor elementor-57" data-elementor-post-type="page">
-				<div id="top" class="elementor-element elementor-element-94b1630 e-flex e-con-boxed e-con e-parent e-no-lazyload e-lazyloaded" data-id="94b1630" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+				<div class="bowie-mobile-hero-shell">
+					<div id="top" class="bowie-mobile-top-anchor" aria-hidden="true"></div>
+					<div class="bowie-mobile-hero-copy">
+						<h2 class="bowie-mobile-hero-title">BOWIE the First Elon Dog<br>sent to space</h2>
+						<div class="bowie-hero-kicker">Before <span class="bowie-hero-highlight">ASTEROID SHIBA</span></div>
+						<div class="bowie-mobile-hero-text">
+							<p>While all those memecoins dream of hitting the moon, let&#8217;s be real: Bowie rocketed off in a Tesla Roadster and has been cruising through space since 2018, like he owns the galaxy!</p>
+							<p>Thanks to Elon, now that’s what we call a rock ‘n’ roll journey!</p>
+						</div>
+						<div class="bowie-mobile-hero-buy">
+							<a href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204">
+								<img loading="eager" decoding="async" width="800" height="450" src="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png" class="elementor-animation-grow attachment-large size-large wp-image-487" alt="" srcset="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png 1024w, /wp-content/uploads/2024/10/Add-a-heading-7-300x169.png 300w, /wp-content/uploads/2024/10/Add-a-heading-7-768x432.png 768w, /wp-content/uploads/2024/10/Add-a-heading-7-1536x864.png 1536w, /wp-content/uploads/2024/10/Add-a-heading-7.png 1920w" sizes="(max-width: 800px) 100vw, 800px">
+							</a>
+						</div>
+					</div>
+					<div class="bowie-mobile-hero-stage">
+						<div class="bowie-mobile-hero-track" tabindex="0" aria-label="Swipe left or right to explore the full Bowie hero scene">
+							<div class="bowie-mobile-hero-scene" aria-hidden="true"></div>
+						</div>
+					</div>
+				</div>
+				<div id="top-hero" class="elementor-element elementor-element-94b1630 e-flex e-con-boxed e-con e-parent e-no-lazyload e-lazyloaded" data-id="94b1630" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
 					<div class="e-con-inner">
 		<div class="elementor-element elementor-element-ff5fcaf e-con-full e-flex e-con e-child" data-id="ff5fcaf" data-element_type="container">
 				</div>
@@ -344,6 +488,11 @@ body.home #masthead .bowie-roadster-link{min-width:unset;width:100%;padding:11px
 														<a href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204">
 							<img loading="eager" decoding="async" width="800" height="450" src="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png" class="elementor-animation-grow attachment-large size-large wp-image-487" alt="" srcset="/wp-content/uploads/2024/10/Add-a-heading-7-1024x576.png 1024w, /wp-content/uploads/2024/10/Add-a-heading-7-300x169.png 300w, /wp-content/uploads/2024/10/Add-a-heading-7-768x432.png 768w, /wp-content/uploads/2024/10/Add-a-heading-7-1536x864.png 1536w, /wp-content/uploads/2024/10/Add-a-heading-7.png 1920w" sizes="(max-width: 800px) 100vw, 800px">								</a>
 													</div>
+				</div>
+				<div class="bowie-mobile-hero-stage">
+					<div class="bowie-mobile-hero-track" tabindex="0" aria-label="Swipe left or right to explore the full Bowie hero scene">
+						<div class="bowie-mobile-hero-scene" aria-hidden="true"></div>
+					</div>
 				</div>
 				</div>
 					</div>
@@ -811,5 +960,99 @@ wp.i18n.setLocaleData( { 'text directionltr': [ 'ltr' ] } );
 <script src="/wp-content/plugins/elementskit-lite/widgets/init/assets/js/animate-circle.min.js?ver=3.2.9" id="animate-circle-js"></script>
 <script id="elementskit-elementor-js-extra">var ekit_config = {"ajaxurl":"\/wp-admin\/admin-ajax.php","nonce":"b420a1c27d"};</script>
 <script src="/wp-content/plugins/elementskit-lite/widgets/init/assets/js/elementor.js?ver=3.2.9" id="elementskit-elementor-js"></script>
+<script id="bowie-mobile-ux-js">
+(() => {
+	const mobileQuery = window.matchMedia('(max-width: 767px)');
+	const body = document.body;
+	const navRoot = document.querySelector('.elementor-element-ab9ce3c .hfe-nav-menu');
+	const heroTrack = document.querySelector('.bowie-mobile-hero-track');
+	const toggle = navRoot ? navRoot.querySelector('.hfe-nav-menu__toggle') : null;
+	const shade = navRoot ? navRoot.querySelector('.bowie-mobile-drawer-shade') : null;
+	let heroInteracted = false;
+	const closeMenu = () => {
+		if ( toggle && toggle.classList.contains('hfe-active-menu') ) {
+			toggle.click();
+		} else {
+			body.classList.remove('bowie-mobile-menu-open');
+		}
+	};
+	const syncMenuState = () => {
+		body.classList.toggle('bowie-mobile-menu-open', !!toggle && mobileQuery.matches && toggle.classList.contains('hfe-active-menu'));
+	};
+	const centerHeroTrack = () => {
+		if ( !heroTrack || !mobileQuery.matches || heroInteracted ) {
+			return;
+		}
+		window.requestAnimationFrame(() => {
+			heroTrack.scrollLeft = Math.max(0, (heroTrack.scrollWidth - heroTrack.clientWidth) / 2);
+		});
+	};
+	if ( toggle ) {
+		toggle.addEventListener('click', () => window.requestAnimationFrame(syncMenuState));
+	}
+	if ( shade ) {
+		shade.addEventListener('click', closeMenu);
+	}
+	if ( navRoot ) {
+		navRoot.querySelectorAll('.hfe-menu-item, .hfe-sub-menu-item, .bowie-mobile-drawer-extras a').forEach((link) => {
+			link.addEventListener('click', () => {
+				if ( !mobileQuery.matches ) {
+					return;
+				}
+				window.setTimeout(syncMenuState, 120);
+				if ( toggle && toggle.classList.contains('hfe-active-menu') && !link.classList.contains('hfe-menu-toggle') ) {
+					window.setTimeout(closeMenu, 160);
+				}
+			});
+		});
+	}
+	const onQueryChange = () => {
+		body.classList.remove('bowie-mobile-menu-open');
+		if ( heroTrack ) {
+			heroInteracted = false;
+			centerHeroTrack();
+		}
+	};
+	if ( mobileQuery.addEventListener ) {
+		mobileQuery.addEventListener('change', onQueryChange);
+	} else if ( mobileQuery.addListener ) {
+		mobileQuery.addListener(onQueryChange);
+	}
+	if ( heroTrack ) {
+		let active = false;
+		let startX = 0;
+		let startScroll = 0;
+		heroTrack.addEventListener('touchstart', (event) => {
+			if ( !mobileQuery.matches || event.touches.length !== 1 ) {
+				return;
+			}
+			active = true;
+			heroInteracted = true;
+			startX = event.touches[0].clientX;
+			startScroll = heroTrack.scrollLeft;
+		}, { passive: true });
+		heroTrack.addEventListener('touchmove', (event) => {
+			if ( !active || event.touches.length !== 1 ) {
+				return;
+			}
+			const delta = event.touches[0].clientX - startX;
+			heroTrack.scrollLeft = startScroll - delta;
+		}, { passive: true });
+		const endPan = () => {
+			active = false;
+		};
+		heroTrack.addEventListener('touchend', endPan, { passive: true });
+		heroTrack.addEventListener('touchcancel', endPan, { passive: true });
+		heroTrack.addEventListener('scroll', () => {
+			if ( mobileQuery.matches ) {
+				heroInteracted = true;
+			}
+		}, { passive: true });
+		window.addEventListener('load', centerHeroTrack, { once: true });
+		window.addEventListener('resize', centerHeroTrack);
+		centerHeroTrack();
+	}
+})();
+</script>
 </body>
 </html>
