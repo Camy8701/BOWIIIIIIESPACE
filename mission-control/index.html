@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bowie Mission Control</title>
+  <meta name="description" content="Bowie Mission Control: live chart, lore, mission objectives, and buy flow for Bowie the space dog.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bayon&amp;family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --space-950: #060914;
+      --space-900: #0a0e1a;
+      --space-850: #10162a;
+      --space-800: #131829;
+      --space-780: #161d32;
+      --space-740: #1a1f35;
+      --space-700: #202842;
+      --accent-red: #ff4d2e;
+      --accent-blue: #2b80ff;
+      --accent-purple: #8f48b4;
+      --accent-gold: #f5c542;
+      --accent-green: #3ddc84;
+      --text-primary: #e8eaf0;
+      --text-muted: #9aa3b8;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --panel-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+      --glow-red: rgba(255, 77, 46, 0.12);
+      --glow-blue: rgba(43, 128, 255, 0.1);
+      --page-width: 1680px;
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --mobile-bar: 78px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: var(--text-primary);
+      background:
+        radial-gradient(circle at 83% 11%, rgba(255, 219, 113, 0.28) 0%, rgba(255, 219, 113, 0) 18%),
+        radial-gradient(circle at 18% 18%, rgba(43, 128, 255, 0.14) 0%, rgba(43, 128, 255, 0) 24%),
+        linear-gradient(180deg, rgba(8, 10, 24, 0.84), rgba(8, 11, 26, 0.96)),
+        url("/wp-content/uploads/2024/10/IMG_2088-poster.jpg") center top / cover no-repeat fixed,
+        var(--space-900);
+      overflow-x: hidden;
+    }
+
+    body.drawer-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .mission-page {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      padding: 28px 18px 40px;
+    }
+
+    .mission-page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 42%),
+        radial-gradient(circle at 10% 34%, rgba(255, 77, 46, 0.06) 0%, rgba(255, 77, 46, 0) 22%),
+        radial-gradient(circle at 92% 72%, rgba(43, 128, 255, 0.08) 0%, rgba(43, 128, 255, 0) 20%);
+      z-index: -1;
+    }
+
+    .mobile-header {
+      display: none;
+    }
+
+    .mobile-drawer,
+    .mobile-drawer-shade {
+      display: none;
+    }
+
+    .mission-shell {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr) 330px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(19, 24, 41, 0.93), rgba(14, 18, 31, 0.9));
+      box-shadow: var(--panel-shadow);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+      opacity: 0.7;
+    }
+
+    .panel-inner {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
+    }
+
+    .brand-panel .panel-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-mark {
+      flex: 0 0 62px;
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .brand-mark img {
+      width: 46px;
+      height: 46px;
+      display: block;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .brand-name {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #fff;
+    }
+
+    .brand-subtitle {
+      margin: 4px 0 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .project-card .panel-inner {
+      display: grid;
+      gap: 16px;
+    }
+
+    .project-portrait {
+      position: relative;
+      min-height: 180px;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(245, 197, 66, 0.14) 0%, rgba(245, 197, 66, 0) 44%),
+        linear-gradient(180deg, rgba(8, 12, 26, 0.2), rgba(8, 12, 26, 0.72)),
+        #0d1120;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .project-portrait img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .project-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(14, 20, 35, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      color: #d7f3e3;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 0 8px rgba(61, 220, 132, 0.12);
+    }
+
+    .project-copy h2,
+    .sidebar-title,
+    .section-title,
+    .stats-title,
+    .footer-tagline {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      letter-spacing: -0.04em;
+    }
+
+    .project-copy h2 {
+      font-size: 30px;
+    }
+
+    .project-copy p {
+      margin: 6px 0 0;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav-panel .panel-inner {
+      padding: 14px;
+    }
+
+    .mission-nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mission-nav a {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.02);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .mission-nav a:hover {
+      transform: translateX(4px);
+      border-color: rgba(255, 77, 46, 0.22);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-index {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--accent-gold);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-label {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .nav-arrow {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .join-card {
+      min-height: 320px;
+    }
+
+    .join-card .panel-inner {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 16px;
+      background:
+        linear-gradient(180deg, rgba(10, 14, 26, 0) 14%, rgba(10, 14, 26, 0.84) 72%),
+        linear-gradient(145deg, rgba(255, 77, 46, 0.1), rgba(43, 128, 255, 0.08));
+    }
+
+    .join-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(12, 14, 28, 0.04), rgba(12, 14, 28, 0.24)),
+        url("/wp-content/uploads/2024/10/20241019_002107.png") center 26% / cover no-repeat;
+      opacity: 0.94;
+      z-index: 0;
+    }
+
+    .join-card .panel-inner > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .join-card h2 {
+      font-size: 32px;
+    }
+
+    .join-card p {
+      margin: 0;
+      max-width: 20ch;
+      color: rgba(232, 234, 240, 0.86);
+      line-height: 1.55;
+    }
+
+    .sidebar-socials {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .social-chip {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .social-chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .social-chip img {
+      width: 36px;
+      height: 36px;
+      display: block;
+    }
+
+    .angled-button,
+    .ghost-button,
+    .status-button,
+    .copy-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 0;
+      border: 1px solid transparent;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .angled-button {
+      clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+      background: linear-gradient(90deg, #ff192b 0%, #8f48b4 42%, #2b80ff 100%);
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.25);
+      font-family: "Bayon", sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      line-height: 0.9;
+      text-transform: uppercase;
+      padding-inline: 24px;
+    }
+
+    .angled-button:hover,
+    .copy-button:hover,
+    .ghost-button:hover {
+      transform: translateY(-2px);
+      filter: saturate(1.08) brightness(1.04);
+    }
+
+    .angled-button.is-large {
+      min-height: 58px;
+      font-size: 24px;
+      padding-inline: 28px;
+    }
+
+    .ghost-button,
+    .status-button,
+    .copy-button {
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      min-height: 44px;
+      padding: 10px 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .status-button {
+      cursor: default;
+      color: var(--text-muted);
+    }
+
+    .ghost-button.is-outline {
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .dashboard-main {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .hero-strip .panel-inner {
+      display: grid;
+      gap: 18px;
+      padding: 28px;
+    }
+
+    .hero-strip::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(10, 14, 26, 0.88) 0%, rgba(10, 14, 26, 0.72) 48%, rgba(10, 14, 26, 0.3) 100%),
+        url("/wp-content/uploads/2024/10/3-2.png") right center / 46% auto no-repeat;
+      z-index: 0;
+      opacity: 0.95;
+    }
+
+    .hero-strip .panel-inner > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .hero-kicker {
+      margin: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffdca1;
+    }
+
+    .hero-title {
+      margin: 0;
+      max-width: 11ch;
+      font-family: "Bayon", sans-serif;
+      font-size: clamp(48px, 5.2vw, 86px);
+      font-style: italic;
+      line-height: 0.88;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 18px 36px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-text {
+      margin: 0;
+      max-width: 60ch;
+      color: rgba(232, 234, 240, 0.82);
+      line-height: 1.72;
+      font-size: 15px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .ticker-panel .panel-inner {
+      display: grid;
+      gap: 22px;
+      padding: 26px;
+    }
+
+    .ticker-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-label {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #fff;
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255, 77, 46, 0.16), rgba(143, 72, 180, 0.12));
+      border: 1px solid rgba(255, 77, 46, 0.2);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #ffd4cb;
+    }
+
+    .live-pill .pulse {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      box-shadow: 0 0 0 0 rgba(255, 77, 46, 0.48);
+      animation: missionPulse 2s infinite;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-card dt {
+      margin: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .stat-card dd {
+      margin: 10px 0 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(24px, 2vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+
+    .stat-card dd.positive {
+      color: var(--accent-green);
+    }
+
+    .contract-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background:
+        linear-gradient(90deg, rgba(255, 77, 46, 0.1), rgba(43, 128, 255, 0.08)),
+        rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .contract-meta {
+      display: grid;
+      gap: 6px;
+    }
+
+    .contract-meta strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 14px;
+      color: #fff;
+      overflow-wrap: anywhere;
+    }
+
+    .contract-meta span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .contract-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .copy-feedback {
+      min-width: 74px;
+      text-align: center;
+    }
+
+    .chart-panel .panel-inner,
+    .lore-panel .panel-inner,
+    .starman-panel .panel-inner,
+    .objectives-panel .panel-inner,
+    .glance-panel .panel-inner,
+    .swap-panel .panel-inner,
+    .holders-panel .panel-inner,
+    .footer-panel .panel-inner {
+      display: grid;
+      gap: 18px;
+      padding: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 2.3vw, 40px);
+      color: #fff;
+    }
+
+    .section-subtitle {
+      margin: 8px 0 0;
+      max-width: 60ch;
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .chart-frame,
+    .swap-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 77, 46, 0.16), rgba(255, 77, 46, 0) 28%),
+        linear-gradient(180deg, rgba(26, 31, 53, 0.94), rgba(11, 16, 30, 0.96));
+      min-height: 240px;
+    }
+
+    .chart-frame iframe,
+    .swap-frame iframe {
+      width: 100%;
+      display: block;
+      border: 0;
+      background: transparent;
+    }
+
+    .chart-frame iframe {
+      height: 560px;
+    }
+
+    .swap-frame iframe {
+      height: 520px;
+    }
+
+    .embed-hint {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .content-duo {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 24px;
+    }
+
+    .lore-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+      gap: 22px;
+      align-items: center;
+    }
+
+    .lore-visual {
+      display: grid;
+      gap: 14px;
+    }
+
+    .lore-main-art,
+    .lore-secondary-art {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .lore-main-art img,
+    .lore-secondary-art img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .lore-copy {
+      display: grid;
+      gap: 16px;
+    }
+
+    .story-lead {
+      margin: 0;
+      font-family: "Bayon", sans-serif;
+      font-size: clamp(34px, 3vw, 52px);
+      font-style: italic;
+      line-height: 0.94;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .story-highlight {
+      color: #ffdca1;
+    }
+
+    .lore-copy p {
+      margin: 0;
+      color: rgba(232, 234, 240, 0.82);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .starman-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .starman-card {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(43, 128, 255, 0.1), rgba(43, 128, 255, 0) 34%),
+        rgba(255, 255, 255, 0.03);
+      min-height: 178px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .starman-label {
+      margin: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #aeb6c9;
+    }
+
+    .starman-value {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 3vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: #fff;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.06);
+      animation: dataGlow 3.4s ease-in-out infinite;
+    }
+
+    .starman-note {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .objective-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .objective-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .objective-check {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      margin: 2px 0 0;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .objective-check:checked {
+      background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+      border-color: transparent;
+    }
+
+    .objective-check:checked::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 2px;
+      width: 5px;
+      height: 11px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .objective-copy h3 {
+      margin: 0;
+      font-size: 17px;
+      color: #fff;
+    }
+
+    .objective-copy p {
+      margin: 6px 0 0;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .mini-link {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      align-self: center;
+    }
+
+    .objective-item.is-complete {
+      border-color: rgba(61, 220, 132, 0.28);
+      background: linear-gradient(180deg, rgba(61, 220, 132, 0.08), rgba(255, 255, 255, 0.03));
+    }
+
+    .glance-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .glance-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .glance-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .glance-row dt {
+      margin: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .glance-row dd {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      text-align: right;
+    }
+
+    .glance-row dd.success {
+      color: var(--accent-green);
+    }
+
+    .placeholder-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffdca1;
+      background: rgba(245, 197, 66, 0.08);
+      border: 1px solid rgba(245, 197, 66, 0.18);
+    }
+
+    .holders-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .holder-row {
+      display: grid;
+      gap: 6px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .holder-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .wallet {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .side-tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(61, 220, 132, 0.1);
+      border: 1px solid rgba(61, 220, 132, 0.16);
+      color: var(--accent-green);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .holder-amount {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .holder-time {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .footer-panel .panel-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-links a,
+    .footer-links span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .footer-links span {
+      color: var(--text-muted);
+    }
+
+    .footer-tagline {
+      font-size: clamp(26px, 2.2vw, 36px);
+      color: #fff;
+    }
+
+    .footer-tagline small {
+      display: block;
+      margin-top: 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(20px);
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(11, 16, 30, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      color: #fff;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 5000;
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .skip-link:focus {
+      left: 20px;
+      top: 20px;
+      z-index: 6000;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: #fff;
+      color: #000;
+    }
+
+    @keyframes missionPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 46, 0.42);
+      }
+      70% {
+        box-shadow: 0 0 0 12px rgba(255, 77, 46, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 46, 0);
+      }
+    }
+
+    @keyframes dataGlow {
+      0%,
+      100% {
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.04);
+      }
+      50% {
+        text-shadow: 0 0 20px rgba(245, 197, 66, 0.12);
+      }
+    }
+
+    @media (max-width: 1360px) {
+      .mission-shell {
+        grid-template-columns: 254px minmax(0, 1fr) 310px;
+      }
+
+      .hero-strip::after {
+        background-size: 52% auto;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .mission-shell {
+        grid-template-columns: minmax(0, 1fr) 320px;
+      }
+
+      .sidebar-left {
+        display: none;
+      }
+
+      .mobile-header,
+      .mobile-drawer,
+      .mobile-drawer-shade {
+        display: block;
+      }
+
+      .mission-page {
+        padding-top: calc(var(--mobile-bar) + 22px);
+      }
+
+      .mobile-header {
+        position: fixed;
+        top: 10px;
+        left: 12px;
+        right: 12px;
+        z-index: 4200;
+      }
+
+      .mobile-header-inner {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: var(--mobile-bar);
+        padding: 10px 14px;
+        border-radius: 26px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(19, 24, 41, 0.92), rgba(10, 14, 26, 0.9));
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .drawer-toggle {
+        width: 46px;
+        height: 46px;
+        padding: 0;
+        border: 0;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .drawer-toggle-lines {
+        display: grid;
+        gap: 4px;
+      }
+
+      .drawer-toggle-lines span {
+        width: 18px;
+        height: 2px;
+        border-radius: 999px;
+        background: #fff;
+        display: block;
+      }
+
+      .mobile-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        pointer-events: none;
+      }
+
+      .mobile-brand img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .mobile-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-right: 2px;
+      }
+
+      .mobile-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .mobile-icon img {
+        width: 28px;
+        height: 28px;
+        display: block;
+      }
+
+      .mobile-buy {
+        min-height: 40px;
+        padding-inline: 16px;
+        font-size: 16px;
+      }
+
+      .mobile-drawer-shade {
+        position: fixed;
+        inset: 0;
+        background: rgba(4, 6, 14, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 4090;
+      }
+
+      .mobile-drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: min(88vw, 360px);
+        height: 100dvh;
+        padding: 92px 18px 28px;
+        transform: translateX(-105%);
+        transition: transform 0.3s ease;
+        z-index: 4100;
+      }
+
+      .mobile-drawer .panel-inner {
+        height: calc(100dvh - 120px);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        overflow-y: auto;
+        padding: 22px;
+      }
+
+      body.drawer-open .mobile-drawer {
+        transform: translateX(0);
+      }
+
+      body.drawer-open .mobile-drawer-shade {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-drawer .mission-nav {
+        margin-top: 6px;
+      }
+
+      .mobile-drawer .join-card {
+        min-height: 260px;
+      }
+
+      .mobile-drawer .join-card .panel-inner {
+        min-height: 260px;
+      }
+
+      .hero-grid,
+      .content-duo,
+      .lore-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .mission-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar-right {
+        position: static;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .starman-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .mission-page {
+        padding-inline: 12px;
+        padding-bottom: 28px;
+      }
+
+      .mobile-header {
+        top: 8px;
+        left: 10px;
+        right: 10px;
+      }
+
+      .mobile-header-inner {
+        min-height: 72px;
+        padding: 10px 12px;
+      }
+
+      .mobile-actions {
+        gap: 6px;
+      }
+
+      .mobile-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+      }
+
+      .mobile-icon img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .mobile-buy {
+        min-height: 36px;
+        padding-inline: 12px;
+        font-size: 14px;
+      }
+
+      .panel-inner,
+      .hero-strip .panel-inner,
+      .ticker-panel .panel-inner,
+      .chart-panel .panel-inner,
+      .lore-panel .panel-inner,
+      .starman-panel .panel-inner,
+      .objectives-panel .panel-inner,
+      .glance-panel .panel-inner,
+      .swap-panel .panel-inner,
+      .holders-panel .panel-inner,
+      .footer-panel .panel-inner {
+        padding: 18px;
+      }
+
+      .hero-title {
+        max-width: 9ch;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contract-bar {
+        align-items: stretch;
+      }
+
+      .contract-actions {
+        width: 100%;
+      }
+
+      .contract-actions > * {
+        flex: 1 1 100%;
+      }
+
+      .chart-frame iframe {
+        height: 480px;
+      }
+
+      .swap-frame iframe {
+        height: 480px;
+      }
+
+      .objective-item {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .mini-link {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .footer-panel .panel-inner {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#chart">Skip to chart</a>
+
+  <header class="mobile-header" aria-label="Mobile mission control header">
+    <div class="mobile-header-inner">
+      <button class="drawer-toggle" type="button" aria-label="Open mission navigation" aria-expanded="false" aria-controls="mobileDrawer">
+        <span class="drawer-toggle-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      <div class="mobile-brand" aria-hidden="true">
+        <img src="/wp-content/uploads/2024/10/Untitled-design-1024x1024.png" alt="">
+      </div>
+      <div class="mobile-actions">
+        <a class="mobile-icon" href="https://t.me/BowieSpaceDog" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+          <img src="/wp-content/uploads/2024/10/1-1-1024x1024.png" alt="Telegram">
+        </a>
+        <a class="mobile-icon" href="https://x.com/SpaceDogBowie" aria-label="X" target="_blank" rel="noopener noreferrer">
+          <img src="/wp-content/uploads/2024/10/2-1-1024x1024.png" alt="X">
+        </a>
+        <a class="angled-button mobile-buy" href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204" target="_blank" rel="noopener noreferrer">Buy $Bowie</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer-shade" data-drawer-close></div>
+
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile mission navigation">
+    <div class="panel">
+      <div class="panel-inner">
+        <div class="brand-panel">
+          <div class="panel-inner" style="padding:0;display:flex;align-items:center;gap:14px;">
+            <div class="brand-mark">
+              <img src="/wp-content/uploads/2024/10/Untitled-design-1024x1024.png" alt="Bowie bolt logo">
+            </div>
+            <div>
+              <p class="eyebrow">Stand Alone Route</p>
+              <h1 class="brand-name">Mission Control</h1>
+              <p class="brand-subtitle">Bowie command deck</p>
+            </div>
+          </div>
+        </div>
+
+        <nav class="mission-nav" aria-label="Mission sections">
+          <a href="#chart" data-drawer-close><span class="nav-index">01</span><span class="nav-label">Chart</span><span class="nav-arrow">↗</span></a>
+          <a href="#starman" data-drawer-close><span class="nav-index">02</span><span class="nav-label">Starman</span><span class="nav-arrow">↗</span></a>
+          <a href="#lore" data-drawer-close><span class="nav-index">03</span><span class="nav-label">Lore</span><span class="nav-arrow">↗</span></a>
+          <a href="#raids" data-drawer-close><span class="nav-index">04</span><span class="nav-label">Raids</span><span class="nav-arrow">↗</span></a>
+          <a href="#swap" data-drawer-close><span class="nav-index">05</span><span class="nav-label">Buy $BOWIE</span><span class="nav-arrow">↗</span></a>
+        </nav>
+
+        <div class="panel join-card">
+          <div class="panel-inner">
+            <p class="eyebrow">Join The Mission</p>
+            <h2 class="sidebar-title">Ride the orbit with Bowie.</h2>
+            <p>Raid with the community, share the lore, and keep the story louder than the clones.</p>
+            <div class="sidebar-socials">
+              <a class="social-chip" href="https://t.me/BowieSpaceDog" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                <img src="/wp-content/uploads/2024/10/1-1-1024x1024.png" alt="Telegram">
+              </a>
+              <a class="social-chip" href="https://x.com/SpaceDogBowie" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <img src="/wp-content/uploads/2024/10/2-1-1024x1024.png" alt="X">
+              </a>
+              <a class="social-chip" href="https://www.instagram.com/bowiespacexdog/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="/wp-content/uploads/2024/10/3-1-1024x1024.png" alt="Instagram">
+              </a>
+              <a class="social-chip" href="https://medium.com/@bowiespacedog/bowie-the-space-dog-be1c52dbc8bc" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+                <img src="/wp-content/uploads/2024/10/4-1024x1024.png" alt="Medium">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="mission-page">
+    <div class="mission-shell">
+      <aside class="sidebar sidebar-left" aria-label="Mission control navigation">
+        <div class="panel brand-panel">
+          <div class="panel-inner">
+            <div class="brand-mark">
+              <img src="/wp-content/uploads/2024/10/Untitled-design-1024x1024.png" alt="Bowie bolt logo">
+            </div>
+            <div>
+              <p class="eyebrow">Bowie</p>
+              <h1 class="brand-name">Mission Control</h1>
+              <p class="brand-subtitle">The original. Still in orbit.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel project-card">
+          <div class="panel-inner">
+            <div class="project-portrait">
+              <img src="/wp-content/uploads/2024/10/Untitled-design-4.gif" alt="Bowie space dog playing guitar in space">
+            </div>
+            <div class="project-copy">
+              <h2>Bowie</h2>
+              <p>@SpaceDogBowie</p>
+            </div>
+            <div class="project-status">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span>Active since 2023</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel nav-panel">
+          <div class="panel-inner">
+            <nav class="mission-nav" aria-label="Desktop mission sections">
+              <a href="#chart"><span class="nav-index">01</span><span class="nav-label">Chart</span><span class="nav-arrow">↗</span></a>
+              <a href="#starman"><span class="nav-index">02</span><span class="nav-label">Starman</span><span class="nav-arrow">↗</span></a>
+              <a href="#lore"><span class="nav-index">03</span><span class="nav-label">Lore</span><span class="nav-arrow">↗</span></a>
+              <a href="#raids"><span class="nav-index">04</span><span class="nav-label">Raids</span><span class="nav-arrow">↗</span></a>
+              <a href="#swap"><span class="nav-index">05</span><span class="nav-label">Buy $BOWIE</span><span class="nav-arrow">↗</span></a>
+            </nav>
+          </div>
+        </div>
+
+        <div class="panel join-card">
+          <div class="panel-inner">
+            <p class="eyebrow">Join The Mission</p>
+            <h2 class="sidebar-title">Raid with us, share the lore, hold the line.</h2>
+            <p>The dashboard is the control room. The community is the engine.</p>
+            <div class="sidebar-socials">
+              <a class="social-chip" href="https://t.me/BowieSpaceDog" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                <img src="/wp-content/uploads/2024/10/1-1-1024x1024.png" alt="Telegram">
+              </a>
+              <a class="social-chip" href="https://x.com/SpaceDogBowie" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <img src="/wp-content/uploads/2024/10/2-1-1024x1024.png" alt="X">
+              </a>
+              <a class="social-chip" href="https://www.instagram.com/bowiespacexdog/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="/wp-content/uploads/2024/10/3-1-1024x1024.png" alt="Instagram">
+              </a>
+              <a class="social-chip" href="https://medium.com/@bowiespacedog/bowie-the-space-dog-be1c52dbc8bc" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+                <img src="/wp-content/uploads/2024/10/4-1024x1024.png" alt="Medium">
+              </a>
+            </div>
+            <div class="hero-actions">
+              <a class="angled-button" href="https://t.me/BowieSpaceDog" target="_blank" rel="noopener noreferrer">Join Telegram</a>
+              <a class="ghost-button is-outline" href="https://x.com/SpaceDogBowie" target="_blank" rel="noopener noreferrer">Follow X</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="dashboard-main">
+        <section class="panel hero-strip" aria-labelledby="heroTitle">
+          <div class="panel-inner">
+            <div class="hero-grid">
+              <div>
+                <p class="hero-kicker">Bowie Mission Control</p>
+                <h2 class="hero-title" id="heroTitle">Track the orbit. Hold the original.</h2>
+              </div>
+              <div class="section-badge">Standalone Build v1</div>
+            </div>
+            <p class="hero-text">This page turns the generic dashboard concept into a Bowie-native command deck: live chart in the middle, lore with the real biography proof, community actions instead of fake rewards, and clear buy flow. API-backed blocks are intentionally structured as placeholders so they can be wired later without redesigning the page.</p>
+            <div class="hero-actions">
+              <a class="angled-button is-large" href="#chart">Open Live Chart</a>
+              <a class="ghost-button" href="https://www.whereisroadster.com/#google_vignette" target="_blank" rel="noopener noreferrer">Where is the Roadster</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel ticker-panel" aria-labelledby="tickerHeading">
+          <div class="panel-inner">
+            <div class="section-header">
+              <div>
+                <div class="ticker-bar">
+                  <span class="ticker-label">$BOWIE</span>
+                  <span class="live-pill"><span class="pulse" aria-hidden="true"></span>MVP static data</span>
+                </div>
+                <h2 class="section-title" id="tickerHeading" style="margin-top:14px;">Price, market cap, and the contract buyers actually need.</h2>
+              </div>
+              <span class="section-badge">Live data slots ready</span>
+            </div>
+
+            <dl class="stats-grid">
+              <div class="stat-card">
+                <dt>Price</dt>
+                <dd>$0.00002058</dd>
+              </div>
+              <div class="stat-card">
+                <dt>Market Cap</dt>
+                <dd>$141K</dd>
+              </div>
+              <div class="stat-card">
+                <dt>24H Change</dt>
+                <dd class="positive">+65.26%</dd>
+              </div>
+              <div class="stat-card">
+                <dt>Holders</dt>
+                <dd>1,212</dd>
+              </div>
+            </dl>
+
+            <div class="contract-bar">
+              <div class="contract-meta">
+                <span>Contract Address</span>
+                <strong id="contractValue">0xcae0dd4bda7ff3e700355c7629b24d5d728bd2ce</strong>
+              </div>
+              <div class="contract-actions">
+                <button class="copy-button" type="button" data-copy-target="#contractValue">Copy CA</button>
+                <span class="status-button">Alerts Placeholder</span>
+                <span class="status-button">Settings Placeholder</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel chart-panel" id="chart" aria-labelledby="chartHeading">
+          <div class="panel-inner">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Main Center Feature</p>
+                <h2 class="section-title" id="chartHeading">Bowie market radar</h2>
+                <p class="section-subtitle">The generic ETH graph is replaced with the embedded Bowie DEXTools chart. The panel is intentionally oversized so the chart feels like the page’s operational core, not a decorative block.</p>
+              </div>
+              <div class="hero-actions">
+                <a class="ghost-button" href="https://www.dextools.io/widget-chart/en/ether/pe-light/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204?theme=dark&amp;chartType=1&amp;chartResolution=1&amp;drawingToolbars=false&amp;chartInUsd=true&amp;headerColor=131829&amp;tvPlatformColor=131829&amp;tvPaneColor=131829" target="_blank" rel="noopener noreferrer">Open DexTools</a>
+                <a class="angled-button" href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204" target="_blank" rel="noopener noreferrer">Buy $Bowie</a>
+              </div>
+            </div>
+
+            <div class="chart-frame">
+              <iframe
+                id="bowie-chart"
+                title="$BOWIE Chart"
+                src="https://www.dextools.io/widget-chart/en/ether/pe-light/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204?theme=dark&amp;chartType=1&amp;chartResolution=1&amp;drawingToolbars=false&amp;chartInUsd=true&amp;headerColor=131829&amp;tvPlatformColor=131829&amp;tvPaneColor=131829"
+                loading="eager"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+        </section>
+
+        <div class="content-duo">
+          <section class="panel starman-panel" id="starman" aria-labelledby="starmanHeading">
+            <div class="panel-inner">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Standout Feature</p>
+                  <h2 class="section-title" id="starmanHeading">Starman live feed</h2>
+                  <p class="section-subtitle">For MVP these values are hardcoded exactly so the layout is stable. They can be replaced later by scraped `whereisroadster.com` data or a NASA/JPL feed without changing the design.</p>
+                </div>
+                <span class="placeholder-badge">Static MVP values</span>
+              </div>
+
+              <div class="starman-grid">
+                <article class="starman-card">
+                  <p class="starman-label">Space Oddity Plays</p>
+                  <p class="starman-value">813,841</p>
+                  <p class="starman-note">+7 today. The soundtrack is still playing in orbit.</p>
+                </article>
+                <article class="starman-card">
+                  <p class="starman-label">Distance From Earth</p>
+                  <p class="starman-value">157.1M</p>
+                  <p class="starman-note">Moving toward Earth at 28,256 mph.</p>
+                </article>
+                <article class="starman-card">
+                  <p class="starman-label">Orbits Completed</p>
+                  <p class="starman-value">5.38</p>
+                  <p class="starman-note">Next milestone: the sixth full solar lap.</p>
+                </article>
+                <article class="starman-card">
+                  <p class="starman-label">Days In Space</p>
+                  <p class="starman-value">2,998</p>
+                  <p class="starman-note">Launched February 6, 2018. The narrative still writes itself.</p>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel objectives-panel" id="raids" aria-labelledby="objectivesHeading">
+            <div class="panel-inner">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Community Actions</p>
+                  <h2 class="section-title" id="objectivesHeading">Mission objectives</h2>
+                  <p class="section-subtitle">This block replaces fake achievement rewards with actions that actually help Bowie. Checkbox state is stored in the browser so returning visitors keep their progress.</p>
+                </div>
+                <span class="section-badge">Local progress saved</span>
+              </div>
+
+              <div class="objective-list">
+                <article class="objective-item" data-objective="follow-x">
+                  <input class="objective-check" type="checkbox" id="objectiveX">
+                  <div class="objective-copy">
+                    <h3>Follow @SpaceDogBowie on X</h3>
+                    <p>Stay on the narrative edge and catch live raids, clips, and positioning against the copycats.</p>
+                  </div>
+                  <a class="mini-link" href="https://x.com/SpaceDogBowie" target="_blank" rel="noopener noreferrer">Open X</a>
+                </article>
+
+                <article class="objective-item" data-objective="join-telegram">
+                  <input class="objective-check" type="checkbox" id="objectiveTelegram">
+                  <div class="objective-copy">
+                    <h3>Join the Telegram</h3>
+                    <p>Real holders, real chat, direct coordination for the next push.</p>
+                  </div>
+                  <a class="mini-link" href="https://t.me/BowieSpaceDog" target="_blank" rel="noopener noreferrer">Join Telegram</a>
+                </article>
+
+                <article class="objective-item" data-objective="share-lore">
+                  <input class="objective-check" type="checkbox" id="objectiveLore">
+                  <div class="objective-copy">
+                    <h3>Share the 1995 Bowie proof</h3>
+                    <p>Every repost of the biography page makes the origin story harder to ignore.</p>
+                  </div>
+                  <a class="mini-link" href="https://medium.com/@bowiespacedog/bowie-the-space-dog-be1c52dbc8bc" target="_blank" rel="noopener noreferrer">Read Lore</a>
+                </article>
+
+                <article class="objective-item" data-objective="reply-asteroid">
+                  <input class="objective-check" type="checkbox" id="objectiveAsteroid">
+                  <div class="objective-copy">
+                    <h3>Reply to an Asteroid Shiba success post</h3>
+                    <p>Rotation positioning matters. Bring Bowie into the conversation where attention already exists.</p>
+                  </div>
+                  <a class="mini-link" href="https://x.com/search?q=Asteroid%20Shiba&amp;src=typed_query" target="_blank" rel="noopener noreferrer">Open Search</a>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="panel lore-panel" id="lore" aria-labelledby="loreHeading">
+          <div class="panel-inner">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Real Story Layer</p>
+                <h2 class="section-title" id="loreHeading">The lore is structural, not cosmetic.</h2>
+                <p class="section-subtitle">Instead of another fake avatar card, this section grounds the page in the actual Bowie origin: Walter Isaacson’s Elon biography and Bowie’s visual orbit around David.</p>
+              </div>
+              <a class="ghost-button" href="https://medium.com/@bowiespacedog/bowie-the-space-dog-be1c52dbc8bc" target="_blank" rel="noopener noreferrer">Open Medium Story</a>
+            </div>
+
+            <div class="lore-grid">
+              <div class="lore-visual">
+                <figure class="lore-main-art">
+                  <img src="/wp-content/uploads/2024/10/2-2.png" alt="Highlighted biography page mentioning Bowie the dachshund">
+                </figure>
+                <figure class="lore-secondary-art">
+                  <img src="/wp-content/uploads/2024/10/3-2.png" alt="Artwork featuring Bowie with David Bowie">
+                </figure>
+              </div>
+
+              <div class="lore-copy">
+                <p class="story-lead">Page 70. David. The dog. <span class="story-highlight">The original orbit.</span></p>
+                <p>The dashboard concept works for Bowie only if it stops pretending to be a generic trading terminal and starts telling the real story. That is why the lore section belongs here: it gives visitors proof, context, and a reason to care beyond the ticker.</p>
+                <p>The biography scan turns the origin into evidence. The David and Bowie artwork turns that evidence into visual identity. Together they do more than decorate the page: they justify why this token has a narrative nobody else can duplicate cleanly.</p>
+                <div class="hero-actions">
+                  <a class="angled-button" href="https://medium.com/@bowiespacedog/bowie-the-space-dog-be1c52dbc8bc" target="_blank" rel="noopener noreferrer">Read The Lore</a>
+                  <a class="ghost-button" href="https://www.whereisroadster.com/#google_vignette" target="_blank" rel="noopener noreferrer">Track Starman</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel footer-panel">
+          <div class="panel-inner">
+            <div class="footer-tagline">
+              The original. Still in orbit.
+              <small>Bowie Mission Control</small>
+            </div>
+            <div class="footer-links">
+              <a href="https://etherscan.io/token/0xcae0dd4bda7ff3e700355c7629b24d5d728bd2ce" target="_blank" rel="noopener noreferrer">Contract</a>
+              <a href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204" target="_blank" rel="noopener noreferrer">Chart</a>
+              <span>Docs Soon</span>
+              <a href="https://x.com/SpaceDogBowie" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+              <a href="https://t.me/BowieSpaceDog" target="_blank" rel="noopener noreferrer">Telegram</a>
+              <a href="https://www.instagram.com/bowiespacexdog/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="sidebar sidebar-right" aria-label="Supplementary mission panels">
+        <section class="panel glance-panel" aria-labelledby="glanceHeading">
+          <div class="panel-inner">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Proof Of Structure</p>
+                <h2 class="section-title" id="glanceHeading">Bowie at a glance</h2>
+              </div>
+            </div>
+
+            <dl class="glance-list">
+              <div class="glance-row">
+                <dt>Market Cap</dt>
+                <dd>$141,660</dd>
+              </div>
+              <div class="glance-row">
+                <dt>Liquidity</dt>
+                <dd>$59,710</dd>
+              </div>
+              <div class="glance-row">
+                <dt>Holders</dt>
+                <dd>1,212</dd>
+              </div>
+              <div class="glance-row">
+                <dt>Supply</dt>
+                <dd>6.94B</dd>
+              </div>
+              <div class="glance-row">
+                <dt>Launched</dt>
+                <dd>Nov 14, 2023</dd>
+              </div>
+              <div class="glance-row">
+                <dt>LP Status</dt>
+                <dd class="success">Burned</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="panel swap-panel" id="swap" aria-labelledby="swapHeading">
+          <div class="panel-inner">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Direct Conversion</p>
+                <h2 class="section-title" id="swapHeading">Swap $BOWIE</h2>
+              </div>
+              <span class="section-badge">Widget slot</span>
+            </div>
+
+            <p class="embed-hint">This slot is reserved for direct buying from the site. If your browser blocks the Uniswap embed, the fallback CTA below still sends visitors to the swap route instantly.</p>
+
+            <div class="swap-frame">
+              <iframe
+                title="Uniswap Bowie swap"
+                src="https://app.uniswap.org/#/swap?outputCurrency=0xcae0dd4bda7ff3e700355c7629b24d5d728bd2ce&amp;theme=dark"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+
+            <div class="hero-actions">
+              <a class="angled-button is-large" href="https://app.uniswap.org/#/swap?outputCurrency=0xcae0dd4bda7ff3e700355c7629b24d5d728bd2ce&amp;theme=dark" target="_blank" rel="noopener noreferrer">Open In Uniswap</a>
+              <a class="ghost-button" href="https://dexscreener.com/ethereum/0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204" target="_blank" rel="noopener noreferrer">DexScreener</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel holders-panel" aria-labelledby="holdersHeading">
+          <div class="panel-inner">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Social Proof</p>
+                <h2 class="section-title" id="holdersHeading">Recent holders</h2>
+              </div>
+            </div>
+
+            <span class="placeholder-badge">API placeholder for Etherscan</span>
+
+            <div class="holders-list">
+              <article class="holder-row">
+                <div class="holder-top">
+                  <span class="wallet">0xabd...d178</span>
+                  <span class="side-tag">Buy</span>
+                </div>
+                <p class="holder-amount">8,709,460 $BOWIE</p>
+                <p class="holder-time">2 minutes ago</p>
+              </article>
+
+              <article class="holder-row">
+                <div class="holder-top">
+                  <span class="wallet">0x7A3...C92b</span>
+                  <span class="side-tag">Buy</span>
+                </div>
+                <p class="holder-amount">1,758,423 $BOWIE</p>
+                <p class="holder-time">14 minutes ago</p>
+              </article>
+
+              <article class="holder-row">
+                <div class="holder-top">
+                  <span class="wallet">0x681...664e</span>
+                  <span class="side-tag">Buy</span>
+                </div>
+                <p class="holder-amount">696,142 $BOWIE</p>
+                <p class="holder-time">26 minutes ago</p>
+              </article>
+            </div>
+
+            <p class="embed-hint">This block is already structured for live transaction rows. Once an API key is available, it can poll Etherscan and replace these placeholder entries without redesign.</p>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+  <script>
+    (function () {
+      const body = document.body;
+      const drawerToggle = document.querySelector(".drawer-toggle");
+      const drawerShade = document.querySelector(".mobile-drawer-shade");
+      const drawerCloseTargets = document.querySelectorAll("[data-drawer-close]");
+      const toast = document.getElementById("toast");
+      const objectiveItems = document.querySelectorAll(".objective-item");
+      const copyButton = document.querySelector("[data-copy-target]");
+
+      function setDrawerState(isOpen) {
+        body.classList.toggle("drawer-open", isOpen);
+        if (drawerToggle) {
+          drawerToggle.setAttribute("aria-expanded", String(isOpen));
+        }
+      }
+
+      if (drawerToggle) {
+        drawerToggle.addEventListener("click", function () {
+          setDrawerState(!body.classList.contains("drawer-open"));
+        });
+      }
+
+      if (drawerShade) {
+        drawerShade.addEventListener("click", function () {
+          setDrawerState(false);
+        });
+      }
+
+      drawerCloseTargets.forEach(function (target) {
+        target.addEventListener("click", function () {
+          setDrawerState(false);
+        });
+      });
+
+      function showToast(message) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add("is-visible");
+        window.clearTimeout(showToast.timer);
+        showToast.timer = window.setTimeout(function () {
+          toast.classList.remove("is-visible");
+        }, 1800);
+      }
+
+      if (copyButton) {
+        copyButton.addEventListener("click", async function () {
+          const selector = copyButton.getAttribute("data-copy-target");
+          const source = selector ? document.querySelector(selector) : null;
+          if (!source) return;
+          const text = source.textContent.trim();
+
+          try {
+            await navigator.clipboard.writeText(text);
+            showToast("Contract copied");
+          } catch (error) {
+            showToast("Copy failed");
+          }
+        });
+      }
+
+      objectiveItems.forEach(function (item) {
+        const key = item.getAttribute("data-objective");
+        const input = item.querySelector(".objective-check");
+        if (!key || !input) return;
+
+        const storageKey = "bowie-mission-" + key;
+        const isChecked = window.localStorage.getItem(storageKey) === "true";
+        input.checked = isChecked;
+        item.classList.toggle("is-complete", isChecked);
+
+        input.addEventListener("change", function () {
+          window.localStorage.setItem(storageKey, String(input.checked));
+          item.classList.toggle("is-complete", input.checked);
+        });
+      });
+    }());
+  </script>
+</body>
+</html>
