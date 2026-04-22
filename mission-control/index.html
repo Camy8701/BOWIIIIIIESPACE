@@ -597,6 +597,10 @@
       color: var(--accent-green);
     }
 
+    .stat-card dd.negative {
+      color: #ff8f8f;
+    }
+
     .contract-bar {
       display: flex;
       align-items: center;
@@ -941,6 +945,10 @@
 
     .glance-row dd.success {
       color: var(--accent-green);
+    }
+
+    .glance-row dd.negative {
+      color: #ff8f8f;
     }
 
     .placeholder-badge {
@@ -1589,29 +1597,29 @@
               <div>
                 <div class="ticker-bar">
                   <span class="ticker-label">$BOWIE</span>
-                  <span class="live-pill"><span class="pulse" aria-hidden="true"></span>MVP static data</span>
+                  <span class="live-pill" id="liveStatus"><span class="pulse" aria-hidden="true"></span>Live via DexScreener API</span>
                 </div>
                 <h2 class="section-title" id="tickerHeading" style="margin-top:14px;">Price, market cap, and the contract buyers actually need.</h2>
               </div>
-              <span class="section-badge">Live data slots ready</span>
+              <span class="section-badge" id="liveRefreshStatus">Refreshes every 30s</span>
             </div>
 
             <dl class="stats-grid">
               <div class="stat-card">
                 <dt>Price</dt>
-                <dd>$0.00002058</dd>
+                <dd id="statPrice">$0.00002058</dd>
               </div>
               <div class="stat-card">
                 <dt>Market Cap</dt>
-                <dd>$141K</dd>
+                <dd id="statMarketCap">$141K</dd>
               </div>
               <div class="stat-card">
                 <dt>24H Change</dt>
-                <dd class="positive">+65.26%</dd>
+                <dd class="positive" id="statChange24h">+65.26%</dd>
               </div>
               <div class="stat-card">
-                <dt>Holders</dt>
-                <dd>1,212</dd>
+                <dt>Liquidity</dt>
+                <dd id="statLiquidity">$59.7K</dd>
               </div>
             </dl>
 
@@ -1622,8 +1630,8 @@
               </div>
               <div class="contract-actions">
                 <button class="copy-button" type="button" data-copy-target="#contractValue">Copy CA</button>
-                <span class="status-button">Alerts Placeholder</span>
-                <span class="status-button">Settings Placeholder</span>
+                <span class="status-button" id="pairStatus">Uniswap v2</span>
+                <span class="status-button" id="updateStatus">Syncing...</span>
               </div>
             </div>
           </div>
@@ -1662,9 +1670,9 @@
                 <div>
                   <p class="eyebrow">Standout Feature</p>
                   <h2 class="section-title" id="starmanHeading">Starman live feed</h2>
-                  <p class="section-subtitle">For MVP these values are hardcoded exactly so the layout is stable. They can be replaced later by scraped `whereisroadster.com` data or a NASA/JPL feed without changing the design.</p>
-                </div>
-                <span class="placeholder-badge">Static MVP values</span>
+                <p class="section-subtitle">These Roadster cards are still editorial MVP values. The market stats above and the sidebar below are now live from DexScreener; this block can be wired later to Roadster data without redesign.</p>
+              </div>
+              <span class="placeholder-badge">Static MVP values</span>
               </div>
 
               <div class="starman-grid">
@@ -1809,27 +1817,27 @@
             <dl class="glance-list">
               <div class="glance-row">
                 <dt>Market Cap</dt>
-                <dd>$141,660</dd>
+                <dd id="glanceMarketCap">$141,660</dd>
               </div>
               <div class="glance-row">
                 <dt>Liquidity</dt>
-                <dd>$59,710</dd>
+                <dd id="glanceLiquidity">$59,710</dd>
               </div>
               <div class="glance-row">
-                <dt>Holders</dt>
-                <dd>1,212</dd>
+                <dt>24H Volume</dt>
+                <dd id="glanceVolume24h">$106.6K</dd>
               </div>
               <div class="glance-row">
-                <dt>Supply</dt>
-                <dd>6.94B</dd>
+                <dt>FDV</dt>
+                <dd id="glanceFdv">$150.9K</dd>
               </div>
               <div class="glance-row">
                 <dt>Launched</dt>
-                <dd>Nov 14, 2023</dd>
+                <dd id="glanceLaunched">Nov 14, 2023</dd>
               </div>
               <div class="glance-row">
-                <dt>LP Status</dt>
-                <dd class="success">Burned</dd>
+                <dt>24H Buys / Sells</dt>
+                <dd id="glanceBuysSells">206 / 123</dd>
               </div>
             </dl>
           </div>
@@ -1921,6 +1929,25 @@
       const toast = document.getElementById("toast");
       const objectiveItems = document.querySelectorAll(".objective-item");
       const copyButton = document.querySelector("[data-copy-target]");
+      const liveElements = {
+        statPrice: document.getElementById("statPrice"),
+        statMarketCap: document.getElementById("statMarketCap"),
+        statChange24h: document.getElementById("statChange24h"),
+        statLiquidity: document.getElementById("statLiquidity"),
+        glanceMarketCap: document.getElementById("glanceMarketCap"),
+        glanceLiquidity: document.getElementById("glanceLiquidity"),
+        glanceVolume24h: document.getElementById("glanceVolume24h"),
+        glanceFdv: document.getElementById("glanceFdv"),
+        glanceLaunched: document.getElementById("glanceLaunched"),
+        glanceBuysSells: document.getElementById("glanceBuysSells"),
+        liveStatus: document.getElementById("liveStatus"),
+        liveRefreshStatus: document.getElementById("liveRefreshStatus"),
+        pairStatus: document.getElementById("pairStatus"),
+        updateStatus: document.getElementById("updateStatus")
+      };
+      const dexScreenerTokenAddress = "0xcae0dd4bda7ff3e700355c7629b24d5d728bd2ce";
+      const preferredPairAddress = "0x8a6386ee4c99c7bf7f325fb6b1af9328e30a5204";
+      const dexScreenerApiUrl = "https://api.dexscreener.com/token-pairs/v1/ethereum/" + dexScreenerTokenAddress;
 
       function setDrawerState(isOpen) {
         body.classList.toggle("drawer-open", isOpen);
@@ -1973,6 +2000,199 @@
         });
       }
 
+      function formatUsd(value, options) {
+        const config = options || {};
+        const number = Number(value);
+
+        if (!Number.isFinite(number)) {
+          return "N/A";
+        }
+
+        if (config.compact) {
+          return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            notation: "compact",
+            maximumFractionDigits: number >= 1000 ? 1 : 2
+          }).format(number);
+        }
+
+        if (number >= 1) {
+          return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format(number);
+        }
+
+        return "$" + number.toFixed(8).replace(/0+$/, "").replace(/\.$/, "");
+      }
+
+      function formatPercent(value) {
+        const number = Number(value);
+
+        if (!Number.isFinite(number)) {
+          return "N/A";
+        }
+
+        const prefix = number > 0 ? "+" : "";
+        return prefix + number.toFixed(2) + "%";
+      }
+
+      function formatDate(timestamp) {
+        const number = Number(timestamp);
+
+        if (!Number.isFinite(number)) {
+          return "N/A";
+        }
+
+        return new Intl.DateTimeFormat("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        }).format(new Date(number));
+      }
+
+      function setSignedState(element, value) {
+        if (!element) return;
+        const number = Number(value);
+        element.classList.remove("positive", "negative");
+
+        if (!Number.isFinite(number)) {
+          return;
+        }
+
+        if (number > 0) {
+          element.classList.add("positive");
+        } else if (number < 0) {
+          element.classList.add("negative");
+        }
+      }
+
+      function pickPreferredPair(pairs) {
+        if (!Array.isArray(pairs) || pairs.length === 0) {
+          return null;
+        }
+
+        const preferred = pairs.find(function (pair) {
+          return String(pair.pairAddress || "").toLowerCase() === preferredPairAddress;
+        });
+
+        if (preferred) {
+          return preferred;
+        }
+
+        return pairs.slice().sort(function (left, right) {
+          return Number(right.liquidity && right.liquidity.usd || 0) - Number(left.liquidity && left.liquidity.usd || 0);
+        })[0];
+      }
+
+      function updateLiveStats(pair) {
+        if (!pair) return;
+
+        if (liveElements.statPrice) {
+          liveElements.statPrice.textContent = formatUsd(pair.priceUsd);
+        }
+
+        if (liveElements.statMarketCap) {
+          liveElements.statMarketCap.textContent = formatUsd(pair.marketCap, { compact: true });
+        }
+
+        if (liveElements.statChange24h) {
+          liveElements.statChange24h.textContent = formatPercent(pair.priceChange && pair.priceChange.h24);
+          setSignedState(liveElements.statChange24h, pair.priceChange && pair.priceChange.h24);
+        }
+
+        if (liveElements.statLiquidity) {
+          liveElements.statLiquidity.textContent = formatUsd(pair.liquidity && pair.liquidity.usd, { compact: true });
+        }
+
+        if (liveElements.glanceMarketCap) {
+          liveElements.glanceMarketCap.textContent = formatUsd(pair.marketCap, { compact: true });
+        }
+
+        if (liveElements.glanceLiquidity) {
+          liveElements.glanceLiquidity.textContent = formatUsd(pair.liquidity && pair.liquidity.usd, { compact: true });
+        }
+
+        if (liveElements.glanceVolume24h) {
+          liveElements.glanceVolume24h.textContent = formatUsd(pair.volume && pair.volume.h24, { compact: true });
+        }
+
+        if (liveElements.glanceFdv) {
+          liveElements.glanceFdv.textContent = formatUsd(pair.fdv, { compact: true });
+        }
+
+        if (liveElements.glanceLaunched) {
+          liveElements.glanceLaunched.textContent = formatDate(pair.pairCreatedAt);
+        }
+
+        if (liveElements.glanceBuysSells) {
+          const buys = pair.txns && pair.txns.h24 && Number.isFinite(Number(pair.txns.h24.buys)) ? pair.txns.h24.buys : "0";
+          const sells = pair.txns && pair.txns.h24 && Number.isFinite(Number(pair.txns.h24.sells)) ? pair.txns.h24.sells : "0";
+          liveElements.glanceBuysSells.textContent = buys + " / " + sells;
+        }
+
+        if (liveElements.pairStatus) {
+          const dexLabel = pair.dexId ? String(pair.dexId).replace(/^\w/, function (letter) {
+            return letter.toUpperCase();
+          }) : "DEX Pair";
+          const versionLabel = Array.isArray(pair.labels) && pair.labels.length ? " " + pair.labels.join(" ") : "";
+          liveElements.pairStatus.textContent = dexLabel + versionLabel;
+        }
+
+        if (liveElements.liveStatus) {
+          liveElements.liveStatus.innerHTML = '<span class="pulse" aria-hidden="true"></span>Live via DexScreener API';
+        }
+
+        if (liveElements.liveRefreshStatus) {
+          liveElements.liveRefreshStatus.textContent = "Refreshes every 30s";
+        }
+
+        if (liveElements.updateStatus) {
+          liveElements.updateStatus.textContent = "Updated " + new Intl.DateTimeFormat("en-US", {
+            hour: "numeric",
+            minute: "2-digit"
+          }).format(new Date());
+        }
+      }
+
+      async function refreshLiveStats() {
+        try {
+          const response = await fetch(dexScreenerApiUrl, {
+            headers: {
+              "Accept": "application/json"
+            }
+          });
+
+          if (!response.ok) {
+            throw new Error("DexScreener request failed");
+          }
+
+          const pairs = await response.json();
+          const pair = pickPreferredPair(pairs);
+
+          if (!pair) {
+            throw new Error("No Bowie pair returned");
+          }
+
+          updateLiveStats(pair);
+        } catch (error) {
+          if (liveElements.liveStatus) {
+            liveElements.liveStatus.innerHTML = '<span class="pulse" aria-hidden="true"></span>Live source unavailable';
+          }
+
+          if (liveElements.liveRefreshStatus) {
+            liveElements.liveRefreshStatus.textContent = "Retrying automatically";
+          }
+
+          if (liveElements.updateStatus) {
+            liveElements.updateStatus.textContent = "Waiting to reconnect";
+          }
+        }
+      }
+
       objectiveItems.forEach(function (item) {
         const key = item.getAttribute("data-objective");
         const input = item.querySelector(".objective-check");
@@ -1988,6 +2208,9 @@
           item.classList.toggle("is-complete", input.checked);
         });
       });
+
+      refreshLiveStats();
+      window.setInterval(refreshLiveStats, 30000);
     }());
   </script>
 </body>
