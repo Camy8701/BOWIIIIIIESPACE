@@ -203,7 +203,7 @@
 
     .project-portrait {
       position: relative;
-      min-height: 0;
+      min-height: 180px;
       border-radius: 22px;
       overflow: hidden;
       background:
@@ -215,9 +215,9 @@
 
     .project-portrait img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
-      object-fit: contain;
+      object-fit: cover;
     }
 
     .project-status {
@@ -460,8 +460,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(10, 14, 26, 0.88) 0%, rgba(10, 14, 26, 0.72) 48%, rgba(10, 14, 26, 0.3) 100%),
-        url("/wp-content/uploads/2024/10/3-2.png") right center / 46% auto no-repeat;
+        linear-gradient(90deg, rgba(10, 14, 26, 0.92) 0%, rgba(10, 14, 26, 0.8) 46%, rgba(10, 14, 26, 0.24) 100%),
+        url("/wp-content/uploads/2024/10/mission-control-roadster-tweet.png") right center / 56% auto no-repeat;
       z-index: 0;
       opacity: 0.95;
     }
@@ -499,12 +499,47 @@
       text-shadow: 0 18px 36px rgba(0, 0, 0, 0.3);
     }
 
+    .hero-title.hero-title-quote {
+      max-width: 17ch;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(32px, 2.8vw, 46px);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      text-transform: none;
+    }
+
     .hero-text {
       margin: 0;
       max-width: 60ch;
       color: rgba(232, 234, 240, 0.82);
       line-height: 1.72;
       font-size: 15px;
+    }
+
+    .hero-quote-block {
+      display: grid;
+      gap: 16px;
+      max-width: 60ch;
+    }
+
+    .hero-quote {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(24px, 2.3vw, 38px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      color: #fff;
+      text-wrap: balance;
+    }
+
+    .hero-quote-note {
+      margin: 0;
+      color: rgba(232, 234, 240, 0.8);
+      font-size: 14px;
+      line-height: 1.65;
     }
 
     .hero-actions {
@@ -1131,7 +1166,7 @@
       }
 
       .hero-strip::after {
-        background-size: 52% auto;
+        background-size: 62% auto;
       }
     }
 
@@ -1381,6 +1416,16 @@
         max-width: 9ch;
       }
 
+      .hero-title.hero-title-quote {
+        max-width: none;
+        font-size: 29px;
+        line-height: 1.08;
+      }
+
+      .hero-quote {
+        font-size: 25px;
+      }
+
       .section-title {
         font-size: 28px;
       }
@@ -1521,7 +1566,7 @@
         <div class="panel project-card">
           <div class="panel-inner">
             <div class="project-portrait">
-              <img src="/wp-content/uploads/2024/10/mission-control-bowie-photo.png" alt="Tesla Owners Silicon Valley post showing young Elon Musk, Kimbal, and Bowie in 1995">
+              <img src="/wp-content/uploads/2024/10/Untitled-design-4.gif" alt="Bowie space dog playing guitar in space">
             </div>
             <div class="project-copy">
               <h2>Bowie</h2>
@@ -1578,15 +1623,18 @@
           <div class="panel-inner">
             <div class="hero-grid">
               <div>
-                <p class="hero-kicker">Bowie Mission Control</p>
-                <h2 class="hero-title" id="heroTitle">Track the orbit. Hold the original.</h2>
+                <p class="hero-kicker">Roadster Quote</p>
+                <h2 class="hero-title hero-title-quote" id="heroTitle">Elon Musk in his own words explaining why he launched the Roadster:</h2>
               </div>
-              <div class="section-badge">Standalone Build v1</div>
+              <div class="section-badge">Muskosophy · Nov 7, 2024</div>
             </div>
-            <p class="hero-text">This page turns the generic dashboard concept into a Bowie-native command deck: live chart in the middle, lore with the real biography proof, community actions instead of fake rewards, and clear buy flow. API-backed blocks are intentionally structured as placeholders so they can be wired later without redesigning the page.</p>
+            <div class="hero-text hero-quote-block">
+              <p class="hero-quote">“There need to be things that inspire you, that make you glad to wake up in the morning and be part of humanity. That is why we did it. We did it for you.”</p>
+              <p class="hero-quote-note">Check the original tweet you linked here.</p>
+            </div>
             <div class="hero-actions">
-              <a class="angled-button is-large" href="#chart">Open Live Chart</a>
-              <a class="ghost-button" href="https://www.whereisroadster.com/#google_vignette" target="_blank" rel="noopener noreferrer">Where is the Roadster</a>
+              <a class="angled-button is-large" href="https://x.com/muskosophy/status/1854394925116194980" target="_blank" rel="noopener noreferrer">Open Original Tweet</a>
+              <a class="ghost-button" href="#chart">Open Live Chart</a>
             </div>
           </div>
         </section>
