@@ -1252,3 +1252,225 @@ body.error404 .page-content p {
     font-size: 18px;
   }
 }
+
+/* Final desktop homepage repair: keep the header compact and the hero as one intact card. */
+body.home .page-header {
+  display: none !important;
+}
+
+@media (min-width: 1025px) {
+  body.home #masthead {
+    top: 10px !important;
+    padding: 0 18px !important;
+  }
+
+  body.home #masthead .elementor-32 {
+    max-width: 1480px !important;
+  }
+
+  body.home #masthead .elementor-element.elementor-element-50931d6 {
+    padding: 0 !important;
+  }
+
+  body.home #masthead .elementor-element.elementor-element-0725648 {
+    display: grid !important;
+    grid-template-columns: max-content max-content minmax(0, 1fr) max-content max-content;
+    justify-content: stretch;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  body.home #masthead .elementor-element.elementor-element-4bbf4fe,
+  body.home #masthead .elementor-element.elementor-element-a310e1e,
+  body.home #masthead .elementor-element.elementor-element-cad530f,
+  body.home #masthead .elementor-element.elementor-element-3d48e0d,
+  body.home #masthead .elementor-element.elementor-element-0b14c8c {
+    min-width: 0;
+  }
+
+  body.home #masthead .hfe-nav-menu {
+    gap: 10px;
+  }
+
+  body.home #masthead .hfe-nav-menu .menu-item a.hfe-menu-item,
+  body.home #masthead .hfe-nav-menu .menu-item a.hfe-sub-menu-item {
+    min-height: 54px;
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+
+  body.home #masthead .bowie-mission-link {
+    width: 122px;
+    height: 122px;
+  }
+
+  body.home #masthead .bowie-mission-link img {
+    width: 92px;
+  }
+
+  body.home #masthead .bowie-mission-ring circle {
+    stroke: rgba(255, 255, 255, 0.36) !important;
+  }
+
+  body.home #masthead .bowie-mission-ring text {
+    fill: #ffffff !important;
+    font-size: 9.75px !important;
+    letter-spacing: 0.2em !important;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  body.home #masthead .elementor-element.elementor-element-cad530f {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding-right: 0;
+    margin-left: 0;
+    justify-self: end;
+    transform: none !important;
+  }
+
+  body.home #masthead .elementor-element.elementor-element-f8d3d3a {
+    gap: 10px;
+  }
+
+  body.home #masthead .elementor-element.elementor-element-a0b9a32 a,
+  body.home #masthead .elementor-element.elementor-element-beb985c a,
+  body.home #masthead .elementor-element.elementor-element-41ace8b a,
+  body.home #masthead .elementor-element.elementor-element-17916dd a {
+    width: 54px;
+    height: 54px;
+    padding: 10px;
+  }
+
+  body.home #masthead .bowie-buy-link,
+  body.home #masthead .bowie-roadster-link {
+    min-height: 54px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 0.96;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  body.home #masthead .bowie-buy-link {
+    min-width: 138px;
+  }
+
+  body.home #masthead .bowie-roadster-link {
+    min-width: 196px;
+  }
+
+  body.home #masthead .elementor-element.elementor-element-3d48e0d,
+  body.home #masthead .elementor-element.elementor-element-0b14c8c {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    width: max-content !important;
+    flex: 0 0 auto !important;
+    overflow: visible !important;
+    transform: none !important;
+    margin-left: 0 !important;
+  }
+
+  body.home #masthead .elementor-element.elementor-element-574a2cf,
+  body.home #masthead .elementor-element.elementor-element-fd45934 {
+    display: flex !important;
+    align-items: center;
+    justify-content: center !important;
+    width: max-content !important;
+    overflow: visible !important;
+  }
+
+  body.home #top-hero {
+    position: relative;
+    margin: 68px 14px 0 !important;
+    min-height: 780px !important;
+    padding: 0 !important;
+    border: var(--bowie-border);
+    border-radius: 34px;
+    box-shadow: var(--bowie-shadow);
+    overflow: hidden !important;
+    background-color: #080412 !important;
+  }
+
+  body.home #top-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(7, 8, 19, 0.82) 0%, rgba(7, 8, 19, 0.64) 25%, rgba(7, 8, 19, 0.3) 44%, rgba(7, 8, 19, 0) 66%),
+      linear-gradient(180deg, rgba(7, 8, 19, 0.1) 0%, rgba(7, 8, 19, 0.18) 100%);
+  }
+
+  body.home #top-hero > .e-con-inner {
+    display: block !important;
+    min-height: 780px;
+    padding: 0 !important;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-ff5fcaf,
+  body.home #top-hero .elementor-element.elementor-element-5bac2d9 {
+    display: none !important;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-b934bfa {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 560px) !important;
+    max-width: 560px;
+    min-height: 780px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 104px 0 74px clamp(34px, 4vw, 70px) !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-c68320e {
+    width: 100%;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-c68320e .elementor-heading-title {
+    max-width: 6.8ch;
+    margin: 0;
+    font-size: clamp(64px, 6vw, 108px);
+    line-height: 0.88;
+    letter-spacing: -0.06em;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+  }
+
+  body.home #top-hero .bowie-hero-kicker {
+    display: block;
+    margin-top: 2px;
+    font-size: clamp(26px, 2.5vw, 40px);
+    line-height: 0.98;
+    text-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-d731fd3,
+  body.home #top-hero .elementor-element.elementor-element-d731fd3 p {
+    max-width: 31ch;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 18px;
+    line-height: 1.5;
+    text-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-effb1a5 {
+    width: fit-content;
+    margin-top: 8px;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-effb1a5 .bowie-home-cta {
+    min-width: 220px;
+  }
+}
