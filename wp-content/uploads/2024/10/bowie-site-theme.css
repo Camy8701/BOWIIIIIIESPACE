@@ -696,6 +696,381 @@ body.home #colophon .bowie-footer-cta {
   min-width: 214px;
 }
 
+body.home #masthead {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 4600;
+  padding: 0 18px;
+}
+
+body.home #masthead > .elementor {
+  max-width: 1780px;
+  margin: 0 auto;
+}
+
+body.home #masthead .elementor-element.elementor-element-0725648 {
+  justify-content: space-between;
+}
+
+body.home #masthead .elementor-element.elementor-element-a310e1e,
+body.home #masthead .elementor-element.elementor-element-cad530f,
+body.home #masthead .elementor-element.elementor-element-f8d3d3a,
+body.home #masthead .elementor-element.elementor-element-3d48e0d,
+body.home #masthead .elementor-element.elementor-element-0b14c8c {
+  flex: 0 0 auto;
+}
+
+body.home #masthead .elementor-element.elementor-element-cad530f {
+  margin-left: auto;
+  gap: 14px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
+body.home #masthead .bowie-mission-ring circle {
+  stroke: rgba(255, 255, 255, 0.42) !important;
+}
+
+body.home #masthead .bowie-mission-ring text {
+  fill: #fff !important;
+}
+
+body.home .bowie-social-glyph {
+  width: 24px;
+  height: 24px;
+  display: block;
+  color: var(--bowie-blue-deep);
+}
+
+body.home .bowie-social-glyph svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+body.home #masthead .elementor-element.elementor-element-a0b9a32 a,
+body.home #masthead .elementor-element.elementor-element-beb985c a,
+body.home #masthead .elementor-element.elementor-element-41ace8b a,
+body.home #masthead .elementor-element.elementor-element-17916dd a,
+body.home #colophon .elementor-element.elementor-element-03a3292 a,
+body.home #colophon .elementor-element.elementor-element-e5bfe1d a,
+body.home #colophon .elementor-element.elementor-element-d80c3a6 a,
+body.home #colophon .elementor-element.elementor-element-4429d53 a,
+body.home .bowie-mobile-topbar-social,
+body.home #masthead .bowie-mobile-socials a {
+  color: var(--bowie-blue-deep);
+}
+
+body.home #masthead .elementor-element.elementor-element-a0b9a32 a:hover,
+body.home #masthead .elementor-element.elementor-element-beb985c a:hover,
+body.home #masthead .elementor-element.elementor-element-41ace8b a:hover,
+body.home #masthead .elementor-element.elementor-element-17916dd a:hover,
+body.home #colophon .elementor-element.elementor-element-03a3292 a:hover,
+body.home #colophon .elementor-element.elementor-element-e5bfe1d a:hover,
+body.home #colophon .elementor-element.elementor-element-d80c3a6 a:hover,
+body.home #colophon .elementor-element.elementor-element-4429d53 a:hover,
+body.home .bowie-mobile-topbar-social:hover,
+body.home #masthead .bowie-mobile-socials a:hover {
+  color: #ff5a19;
+}
+
+body.home #masthead .elementor-element.elementor-element-a0b9a32 img,
+body.home #masthead .elementor-element.elementor-element-beb985c img,
+body.home #masthead .elementor-element.elementor-element-41ace8b img,
+body.home #masthead .elementor-element.elementor-element-17916dd img,
+body.home #colophon .elementor-element.elementor-element-03a3292 img,
+body.home #colophon .elementor-element.elementor-element-e5bfe1d img,
+body.home #colophon .elementor-element.elementor-element-d80c3a6 img,
+body.home #colophon .elementor-element.elementor-element-4429d53 img,
+body.home .bowie-mobile-topbar-social img,
+body.home #masthead .bowie-mobile-socials img {
+  display: none !important;
+}
+
+body.home #masthead .bowie-buy-link,
+body.home #masthead .bowie-roadster-link {
+  min-width: 0;
+  padding: 14px 18px;
+  line-height: 0.94;
+}
+
+body.home #masthead .bowie-buy-link {
+  min-width: 168px;
+}
+
+body.home #masthead .bowie-roadster-link {
+  min-width: 228px;
+}
+
+body.home #colophon .elementor-element.elementor-element-7095486 {
+  background: linear-gradient(180deg, rgba(7, 10, 18, 0.98), rgba(18, 24, 38, 0.98)) !important;
+}
+
+body.home #colophon .elementor-element.elementor-element-c3c6ebc,
+body.home #colophon .elementor-element.elementor-element-77cb667 {
+  gap: 18px;
+  align-items: center;
+}
+
+body.home #colophon .bowie-footer-cta {
+  min-width: 228px;
+}
+
+body.home #about {
+  background: linear-gradient(180deg, rgba(236, 84, 58, 0.98), rgba(222, 76, 86, 0.95)) !important;
+}
+
+body.home #nfts {
+  background: linear-gradient(180deg, rgba(53, 122, 236, 0.98), rgba(35, 94, 214, 0.97)) !important;
+}
+
+body.home #bowienomics {
+  background: linear-gradient(180deg, rgba(255, 235, 125, 0.98), rgba(255, 216, 79, 0.95)) !important;
+}
+
+body.home #utilities .elementor-element.elementor-element-96054cd,
+body.home #utilities .elementor-element.elementor-element-1164e14,
+body.home #utilities .elementor-element.elementor-element-2bfc882,
+body.home #utilities .elementor-element.elementor-element-d0bae63,
+body.home #utilities .elementor-element.elementor-element-8a6729c,
+body.home #utilities .elementor-element.elementor-element-8b66c2a,
+body.home #utilities .elementor-element.elementor-element-19cd668,
+body.home #utilities .elementor-element.elementor-element-e51bc28 {
+  background: linear-gradient(180deg, rgba(255, 126, 76, 0.98), rgba(240, 75, 88, 0.96)) !important;
+}
+
+body.home #utilities .elementor-element.elementor-element-96054cd .elementor-heading-title,
+body.home #utilities .elementor-element.elementor-element-1164e14 .elementor-heading-title,
+body.home #utilities .elementor-element.elementor-element-2bfc882 .elementor-heading-title,
+body.home #utilities .elementor-element.elementor-element-d0bae63 .elementor-heading-title,
+body.home #utilities .elementor-element.elementor-element-8a6729c .elementor-heading-title,
+body.home #utilities .elementor-element.elementor-element-8b66c2a .elementor-heading-title,
+body.home #utilities .elementor-element.elementor-element-19cd668 .elementor-heading-title,
+body.home #utilities .elementor-element.elementor-element-e51bc28 .elementor-heading-title,
+body.home #utilities .elementor-element.elementor-element-13d3e9e,
+body.home #utilities .elementor-element.elementor-element-66a034c,
+body.home #utilities .elementor-element.elementor-element-ffc7119,
+body.home #utilities .elementor-element.elementor-element-80b9560,
+body.home #utilities .elementor-element.elementor-element-688a3e6,
+body.home #utilities .elementor-element.elementor-element-2b66aba,
+body.home #utilities .elementor-element.elementor-element-00d8237,
+body.home #utilities .elementor-element.elementor-element-523e053,
+body.home #utilities .elementor-widget-text-editor li {
+  color: #fff !important;
+}
+
+body.home .elementor-57 > .elementor-element-693c9045 .elementor-swiper-button {
+  background: linear-gradient(180deg, #ffffff, #ffd84f) !important;
+}
+
+body.home .elementor-57 > .elementor-element-693c9045 .elementor-swiper-button svg,
+body.home .elementor-57 > .elementor-element-693c9045 .elementor-swiper-button path {
+  fill: var(--bowie-ink) !important;
+}
+
+@media (min-width: 1025px) {
+  body.home #top-hero {
+    margin: 132px 20px 0 !important;
+    padding: 0 !important;
+    min-height: auto !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  body.home #top-hero > .e-con-inner {
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.98fr) minmax(420px, 1.12fr);
+    gap: 28px;
+    align-items: stretch;
+    padding: 0 !important;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-ff5fcaf {
+    order: 2;
+    display: block !important;
+    min-height: 640px;
+    position: relative;
+    border: var(--bowie-border);
+    border-radius: 34px;
+    box-shadow: var(--bowie-shadow);
+    overflow: hidden;
+    background: #fff;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-ff5fcaf::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/wp-content/uploads/2024/10/IMG_2088.gif"), url("/wp-content/uploads/2024/10/IMG_2088-poster.jpg");
+    background-repeat: no-repeat, no-repeat;
+    background-position: center top, center top;
+    background-size: cover, cover;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-b934bfa {
+    order: 1;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 18px;
+    padding: 18px 0 !important;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent !important;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-c68320e .elementor-heading-title {
+    max-width: 8.5ch;
+    font-size: clamp(56px, 5.6vw, 94px);
+    line-height: 0.9;
+    color: #fff;
+    text-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+  }
+
+  body.home #top-hero .bowie-hero-kicker {
+    margin-top: 6px;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-d731fd3,
+  body.home #top-hero .elementor-element.elementor-element-d731fd3 p {
+    max-width: 34ch;
+    color: rgba(255, 255, 255, 0.94);
+    text-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-effb1a5 {
+    width: fit-content;
+    margin-top: 6px;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-5bac2d9,
+  body.home #bowienomics .elementor-element.elementor-element-ab25fab,
+  body.home #bowienomics .elementor-element.elementor-element-59802d2 {
+    display: none;
+  }
+
+  body.home #top-hero .elementor-element.elementor-element-effb1a5 .bowie-home-cta {
+    width: auto;
+    min-width: 220px;
+  }
+
+  body.home #top-hero .bowie-mobile-hero-stage {
+    display: none !important;
+  }
+
+  body.home #about,
+  body.home #nfts,
+  body.home #bowienomics {
+    padding: 44px 52px !important;
+  }
+
+  body.home #about {
+    display: grid !important;
+    grid-template-columns: minmax(320px, 480px) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 90px);
+    align-items: center;
+  }
+
+  body.home #about > .elementor-element,
+  body.home #bowienomics > .elementor-element {
+    width: auto !important;
+    flex: initial !important;
+  }
+
+  body.home #about .elementor-element.elementor-element-0d6aecd,
+  body.home #nfts .elementor-element.elementor-element-a4cbfca,
+  body.home #bowienomics .elementor-element.elementor-element-b1fdd85,
+  body.home #bowienomics .elementor-element.elementor-element-006b789 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  body.home #about .elementor-element.elementor-element-bf6f329 {
+    max-width: 660px;
+    justify-content: center;
+  }
+
+  body.home #about .elementor-element.elementor-element-7daf93e,
+  body.home #nfts .elementor-element.elementor-element-7231417,
+  body.home #bowienomics .elementor-element.elementor-element-3220f6d,
+  body.home #bowienomics .elementor-element.elementor-element-afc9c6e {
+    width: fit-content !important;
+    max-width: 100%;
+  }
+
+  body.home #about .elementor-element.elementor-element-7daf93e .elementor-widget-container,
+  body.home #nfts .elementor-element.elementor-element-7231417 .elementor-widget-container,
+  body.home #bowienomics .elementor-element.elementor-element-3220f6d .elementor-widget-container,
+  body.home #bowienomics .elementor-element.elementor-element-afc9c6e .elementor-widget-container {
+    padding: 12px;
+    border-radius: 28px;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  body.home #about .elementor-element.elementor-element-7daf93e img {
+    width: auto !important;
+    max-width: 320px;
+  }
+
+  body.home #nfts > .e-con-inner {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 480px);
+    gap: clamp(30px, 5vw, 90px);
+    align-items: center;
+    padding: 0 !important;
+  }
+
+  body.home #nfts .elementor-element.elementor-element-185a1adc {
+    max-width: 720px;
+    justify-content: center;
+  }
+
+  body.home #nfts .elementor-element.elementor-element-7231417 img {
+    width: auto !important;
+    max-width: 420px;
+  }
+
+  body.home #nfts .elementor-element.elementor-element-ad6ca61 {
+    width: fit-content;
+    margin-top: 8px;
+  }
+
+  body.home #bowienomics {
+    display: grid !important;
+    grid-template-columns: minmax(230px, 320px) minmax(0, 1fr) minmax(260px, 360px);
+    gap: clamp(22px, 4vw, 44px);
+    align-items: center;
+  }
+
+  body.home #bowienomics .elementor-element.elementor-element-afc9c6e img {
+    width: auto !important;
+    max-width: 220px;
+  }
+
+  body.home #bowienomics .elementor-element.elementor-element-3220f6d img {
+    width: auto !important;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 767px) {
+  body.home .bowie-mobile-topbar-social .bowie-social-glyph {
+    width: 18px;
+    height: 18px;
+  }
+
+  body.home #masthead .bowie-mobile-socials .bowie-social-glyph {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 body.page-id-383,
 body.error404 {
   min-height: 100vh;
