@@ -1634,6 +1634,7 @@
     }
 
     .brand-mark,
+    .mission-return-link,
     .drawer-toggle,
     .mobile-icon,
     .social-chip,
@@ -1657,6 +1658,38 @@
     .brand-mark {
       background: #fff;
       box-shadow: var(--template-shadow-soft);
+    }
+
+    .mission-return-link {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 4305;
+      width: 58px;
+      height: 58px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      color: var(--template-ink);
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        color 0.22s ease;
+    }
+
+    .mission-return-link:hover {
+      transform: translate(4px, -2px);
+      box-shadow: var(--template-shadow);
+      background: linear-gradient(90deg, #ffffff, #ffd84f);
+      color: #ff5a19;
+    }
+
+    .mission-return-link svg {
+      width: 24px;
+      height: 24px;
+      display: block;
     }
 
     .brand-mark img {
@@ -2433,7 +2466,16 @@
         padding-top: calc(var(--mobile-bar) + 22px);
       }
 
+      .mission-return-link {
+        top: 14px;
+        left: 12px;
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+      }
+
       .mobile-header-inner {
+        padding-left: 72px;
         box-shadow: 8px 8px 0 var(--template-ink);
       }
 
@@ -2488,6 +2530,12 @@
 </head>
 <body>
   <a class="skip-link" href="#chart">Skip to chart</a>
+  <a class="mission-return-link" href="/" aria-label="Return to main website">
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14.75 5.75L8.5 12L14.75 18.25" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="screen-reader-text">Return to main website</span>
+  </a>
 
   <header class="mobile-header" aria-label="Mobile mission control header">
     <div class="mobile-header-inner">
