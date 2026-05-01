@@ -2528,6 +2528,37 @@
         transform: translate3d(-10px, -8px, 0);
       }
     }
+
+    /* Round 5 — fix fixed-header overlap on anchor links */
+    html { scroll-padding-top: 140px; }
+    [id] { scroll-margin-top: 140px; }
+
+    /* Round 3 — unify CTAs with homepage white-pill style, remove orange-on-orange clash */
+    .angled-button,
+    .angled-button.is-large {
+      clip-path: none !important;
+      background: #ffffff !important;
+      color: #181a1b !important;
+      border: 3px solid #181a1b !important;
+      border-radius: 18px !important;
+      font-family: "Fredoka", "Inter", sans-serif !important;
+      font-weight: 900 !important;
+      font-style: normal !important;
+      text-transform: none !important;
+      box-shadow: 0 6px 0 0 #181a1b !important;
+      padding-inline: 24px !important;
+    }
+    .angled-button.is-large {
+      min-height: 60px !important;
+      font-size: 22px !important;
+      padding-inline: 30px !important;
+    }
+    .angled-button:hover,
+    .angled-button.is-large:hover {
+      transform: translateY(-2px) !important;
+      filter: none !important;
+      background: #fff7d6 !important;
+    }
   </style>
 </head>
 <body>
